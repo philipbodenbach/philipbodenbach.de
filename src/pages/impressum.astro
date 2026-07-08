@@ -1,9 +1,10 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
-const canonicalUrl = 'https://www.philipbodenbach.de/impressum/';
-const pageTitle = 'Impressum | Philip Bodenbach';
-const pageDescription = 'Impressum von philipbodenbach.de, Philip Bodenbach, Eschweiler.';
+const canonicalUrl = "https://www.philipbodenbach.de/impressum/";
+const pageTitle = "Impressum | Philip Bodenbach";
+const pageDescription =
+  "Impressum von philipbodenbach.de, Philip Bodenbach, Eschweiler.";
 const themeInitScript = `
   (() => {
     const storageKey = 'pb-theme';
@@ -59,26 +60,35 @@ const themeToggleScript = `
 `;
 
 const navigation = [
-  { href: '/#ueber-mich', label: 'Über mich' },
-  { href: '/#leistungen', label: 'Leistungen' },
-  { href: '/#technologien', label: 'Technologien' },
-  { href: '/#projekte', label: 'Projekte' },
-  { href: '/#kontakt', label: 'Kontakt' },
+  { href: "/#ueber-mich", label: "Über mich" },
+  { href: "/#leistungen", label: "Leistungen" },
+  { href: "/#technologien", label: "Technologien" },
+  { href: "/#projekte", label: "Projekte" },
+  { href: "/#kontakt", label: "Kontakt" },
 ];
 
 const footerLinks = [
-  { href: 'https://github.com/philipbodenbach', label: 'GitHub Profil' },
-  { href: 'https://www.linkedin.com/in/philip-bodenbach', label: 'LinkedIn' },
-  { href: 'https://github.com/philipbodenbach/werk1112', label: 'Werk1112 auf GitHub' },
-  { href: 'https://philipbodenbach.github.io/werk1112/', label: 'Werk1112 Projektseite' },
-  { href: '/impressum/', label: 'Impressum' },
-  { href: '/datenschutz/', label: 'Datenschutz' },
-  { href: '/sitemap.xml', label: 'Sitemap' },
+  { href: "https://github.com/philipbodenbach", label: "GitHub Profil" },
+  { href: "https://www.linkedin.com/in/philip-bodenbach", label: "LinkedIn" },
+  {
+    href: "https://github.com/philipbodenbach/werk1112",
+    label: "Werk1112 auf GitHub",
+  },
+  {
+    href: "https://philipbodenbach.github.io/werk1112/",
+    label: "Werk1112 Projektseite",
+  },
+  { href: "/impressum/", label: "Impressum" },
+  { href: "/datenschutz/", label: "Datenschutz" },
+  { href: "/sitemap.xml", label: "Sitemap" },
 ];
 ---
 
 <!doctype html>
-<html lang="de" class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-100">
+<html
+  lang="de"
+  class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-100"
+>
   <head>
     <meta charset="utf-8" />
     <script is:inline set:html={themeInitScript} />
@@ -97,19 +107,33 @@ const footerLinks = [
     <meta property="og:site_name" content="Philip Bodenbach" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
-    <meta property="og:image" content="https://www.philipbodenbach.de/pb_Logos_schwarz.png" />
+    <meta
+      property="og:image"
+      content="https://www.philipbodenbach.de/pb_Logos_schwarz.png"
+    />
     <meta property="og:image:alt" content="Philip Bodenbach Logo" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content="https://www.philipbodenbach.de/pb_Logos_schwarz.png" />
+    <meta
+      name="twitter:image"
+      content="https://www.philipbodenbach.de/pb_Logos_schwarz.png"
+    />
   </head>
   <body class="font-sans antialiased">
-    <header class="border-b border-neutral-200 bg-neutral-50/90 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/90">
-      <div class="mx-auto flex max-w-6xl flex-col gap-5 px-5 py-5 sm:px-6 lg:px-8">
+    <header
+      class="border-b border-neutral-200 bg-neutral-50/90 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/90"
+    >
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-5 px-5 py-5 sm:px-6 lg:px-8"
+      >
         <div class="flex items-center justify-between gap-6">
-          <a href="/" aria-label="Philip Bodenbach Startseite" class="inline-flex shrink-0 items-center">
+          <a
+            href="/"
+            aria-label="Philip Bodenbach Startseite"
+            class="inline-flex shrink-0 items-center"
+          >
             <img
               src="/pb_Logos_schwarz.png"
               width="521"
@@ -134,12 +158,36 @@ const footerLinks = [
               title="Dark Mode aktivieren"
               class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-300 text-neutral-700 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
             >
-              <svg class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 4V2M12 22v-2M4 12H2M22 12h-2M5.64 5.64 4.22 4.22M19.78 19.78l-1.42-1.42M18.36 5.64l1.42-1.42M4.22 19.78l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8" />
+              <svg
+                class="h-5 w-5 dark:hidden"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 4V2M12 22v-2M4 12H2M22 12h-2M5.64 5.64 4.22 4.22M19.78 19.78l-1.42-1.42M18.36 5.64l1.42-1.42M4.22 19.78l1.42-1.42"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"></path>
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4.2"
+                  stroke="currentColor"
+                  stroke-width="1.8"></circle>
               </svg>
-              <svg class="hidden h-5 w-5 dark:block" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M20 14.4A7.8 7.8 0 0 1 9.6 4 8 8 0 1 0 20 14.4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              <svg
+                class="hidden h-5 w-5 dark:block"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M20 14.4A7.8 7.8 0 0 1 9.6 4 8 8 0 1 0 20 14.4Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
               </svg>
             </button>
             <a
@@ -150,10 +198,16 @@ const footerLinks = [
             </a>
           </div>
         </div>
-        <nav aria-label="Hauptnavigation" class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-neutral-600 dark:text-neutral-300">
+        <nav
+          aria-label="Hauptnavigation"
+          class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-neutral-600 dark:text-neutral-300"
+        >
           {
             navigation.map((item) => (
-              <a href={item.href} class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950">
+              <a
+                href={item.href}
+                class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+              >
                 {item.label}
               </a>
             ))
@@ -165,8 +219,14 @@ const footerLinks = [
     <main>
       <section class="border-b border-neutral-200 dark:border-neutral-800">
         <div class="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
-          <p class="text-sm font-medium uppercase text-teal-800 dark:text-teal-300">philipbodenbach.de</p>
-          <h1 class="mt-3 text-5xl font-semibold leading-[1.05] text-neutral-950 dark:text-white sm:text-6xl">
+          <p
+            class="text-sm font-medium uppercase text-teal-800 dark:text-teal-300"
+          >
+            philipbodenbach.de
+          </p>
+          <h1
+            class="mt-3 text-5xl font-semibold leading-[1.05] text-neutral-950 dark:text-white sm:text-6xl"
+          >
             Impressum
           </h1>
         </div>
@@ -174,55 +234,76 @@ const footerLinks = [
 
       <section class="bg-white dark:bg-neutral-900">
         <div class="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:px-8">
-          <div class="space-y-10 text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+          <div
+            class="space-y-10 text-lg leading-8 text-neutral-700 dark:text-neutral-300"
+          >
             <address class="not-italic">
-              <p class="font-medium text-neutral-950 dark:text-white">Philip Bodenbach</p>
-              <p>Bergstraße 10</p>
+              <p class="font-medium text-neutral-950 dark:text-white">
+                Philip Bodenbach
+              </p>
+              <p>Odilienstraße 19a</p>
               <p>52249 Eschweiler</p>
             </address>
 
             <div>
               <p>
                 Telefon:
-                <a class="font-medium text-neutral-950 hover:text-teal-800 dark:text-white dark:hover:text-teal-200" href="tel:+4924039939606">
+                <a
+                  class="font-medium text-neutral-950 hover:text-teal-800 dark:text-white dark:hover:text-teal-200"
+                  href="tel:+4924039939606"
+                >
                   02403 993 96 06
                 </a>
               </p>
               <p>
                 Mobil:
-                <a class="font-medium text-neutral-950 hover:text-teal-800 dark:text-white dark:hover:text-teal-200" href="tel:+491728295357">
+                <a
+                  class="font-medium text-neutral-950 hover:text-teal-800 dark:text-white dark:hover:text-teal-200"
+                  href="tel:+491728295357"
+                >
                   0172 829 53 57
                 </a>
               </p>
               <p>
                 Email:
-                <a class="font-medium text-neutral-950 hover:text-teal-800 dark:text-white dark:hover:text-teal-200" href="mailto:info@philipbodenbach.de">
+                <a
+                  class="font-medium text-neutral-950 hover:text-teal-800 dark:text-white dark:hover:text-teal-200"
+                  href="mailto:info@philipbodenbach.de"
+                >
                   info@philipbodenbach.de
                 </a>
               </p>
             </div>
 
             <div>
-              <h2 class="text-base font-medium uppercase text-neutral-500 dark:text-neutral-400">
+              <h2
+                class="text-base font-medium uppercase text-neutral-500 dark:text-neutral-400"
+              >
                 Umsatzsteueridentifikationsnummer
               </h2>
               <p class="mt-2">DE 273451840</p>
             </div>
 
             <div>
-              <h2 class="text-base font-medium uppercase text-neutral-500 dark:text-neutral-400">
+              <h2
+                class="text-base font-medium uppercase text-neutral-500 dark:text-neutral-400"
+              >
                 Inhaltlich Verantwortlicher gemäß § 10 Absatz 3 MDStV
               </h2>
               <p class="mt-2">Philip Bodenbach</p>
             </div>
 
             <div>
-              <h2 class="text-base font-medium uppercase text-neutral-500 dark:text-neutral-400">
+              <h2
+                class="text-base font-medium uppercase text-neutral-500 dark:text-neutral-400"
+              >
                 Haftungshinweis
               </h2>
               <p class="mt-2">
-                Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links.
-                Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+                Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine
+                Haftung für die Inhalte externer Links. Für den Inhalt der
+                verlinkten Seiten sind ausschließlich deren Betreiber
+                verantwortlich.
               </p>
             </div>
           </div>
@@ -231,17 +312,25 @@ const footerLinks = [
     </main>
 
     <footer class="border-t border-neutral-200 dark:border-neutral-800">
-      <div class="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 text-sm text-neutral-600 dark:text-neutral-400 sm:px-6 lg:px-8">
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 text-sm text-neutral-600 dark:text-neutral-400 sm:px-6 lg:px-8"
+      >
         <nav aria-label="Footer" class="flex flex-wrap gap-x-5 gap-y-2">
           {
             footerLinks.map((link) => (
-              <a href={link.href} class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950">
+              <a
+                href={link.href}
+                class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+              >
                 {link.label}
               </a>
             ))
           }
         </nav>
-        <p>© {new Date().getFullYear()} Philip Bodenbach. Freelance Software Engineer & Software Architect.</p>
+        <p>
+          © {new Date().getFullYear()} Philip Bodenbach. Freelance Software Engineer
+          & Software Architect.
+        </p>
       </div>
     </footer>
     <script is:inline set:html={themeToggleScript} />

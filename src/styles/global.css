@@ -20,3 +20,87 @@ body {
   background: rgb(17 94 89);
   color: rgb(245 245 245);
 }
+
+.legal-content {
+  color: rgb(64 64 64);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.dark .legal-content {
+  color: rgb(212 212 212);
+}
+
+.legal-content h1,
+.legal-content h2 {
+  color: rgb(10 10 10);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.dark .legal-content h1,
+.dark .legal-content h2 {
+  color: rgb(255 255 255);
+}
+
+.legal-content h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.legal-content h2 {
+  border-top: 1px solid rgb(229 229 229);
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+}
+
+.dark .legal-content h2 {
+  border-top-color: rgb(38 38 38);
+}
+
+.legal-content p,
+.legal-content ul {
+  margin-top: 1rem;
+}
+
+.legal-content ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.legal-content a {
+  color: rgb(17 94 89);
+  font-weight: 500;
+}
+
+.legal-content a:hover {
+  color: rgb(15 118 110);
+}
+
+.dark .legal-content a {
+  color: rgb(94 234 212);
+}
+
+.dark .legal-content a:hover {
+  color: rgb(153 246 228);
+}
+
+.legal-content code {
+  background: rgb(245 245 245);
+  border-radius: 0.25rem;
+  color: rgb(23 23 23);
+  font-size: 0.9375em;
+  padding: 0.125rem 0.25rem;
+}
+
+.dark .legal-content code {
+  background: rgb(38 38 38);
+  color: rgb(245 245 245);
+}
+
+@media (min-width: 40rem) {
+  .legal-content h1 {
+    font-size: 3.75rem;
+  }
+}

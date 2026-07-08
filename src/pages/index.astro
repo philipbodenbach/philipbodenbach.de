@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ReferenceSection from '../components/ReferenceSection.astro';
 
 const canonicalUrl = 'https://www.philipbodenbach.de/';
 const pageTitle = 'Philip Bodenbach | Freelance Software Engineer & Software Architect';
@@ -61,6 +62,7 @@ const themeToggleScript = `
 
 const navigation = [
   { href: '#ueber-mich', label: 'Über mich' },
+  { href: '#referenzen', label: 'Referenzen' },
   { href: '#leistungen', label: 'Leistungen' },
   { href: '#technologien', label: 'Technologien' },
   { href: '#projekte', label: 'Projekte' },
@@ -293,6 +295,8 @@ const personSchema = {
           </div>
         </div>
       </section>
+
+      <ReferenceSection />
 
       <section id="leistungen" class="border-t border-neutral-200 dark:border-neutral-800">
         <div class="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">

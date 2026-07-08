@@ -1,0 +1,188 @@
+---
+import PrivacyPolicy from '../content/legal/privacy.md';
+import '../styles/global.css';
+
+const canonicalUrl = 'https://www.philipbodenbach.de/datenschutz/';
+const pageTitle = 'Datenschutzerklärung | Philip Bodenbach';
+const pageDescription = 'Datenschutzerklärung für philipbodenbach.de.';
+const themeInitScript = `
+  (() => {
+    const storageKey = 'pb-theme';
+    const root = document.documentElement;
+
+    try {
+      const storedTheme = localStorage.getItem(storageKey);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = storedTheme === 'dark' || storedTheme === 'light'
+        ? storedTheme
+        : prefersDark
+          ? 'dark'
+          : 'light';
+
+      root.classList.toggle('dark', theme === 'dark');
+      root.style.colorScheme = theme;
+    } catch {
+      root.classList.remove('dark');
+      root.style.colorScheme = 'light';
+    }
+  })();
+`;
+const themeToggleScript = `
+  (() => {
+    const storageKey = 'pb-theme';
+    const root = document.documentElement;
+    const button = document.querySelector('[data-theme-toggle]');
+
+    if (!button) {
+      return;
+    }
+
+    const syncButton = () => {
+      const isDark = root.classList.contains('dark');
+      const label = isDark ? 'Light Mode aktivieren' : 'Dark Mode aktivieren';
+
+      button.setAttribute('aria-label', label);
+      button.setAttribute('aria-pressed', String(isDark));
+      button.setAttribute('title', label);
+    };
+
+    button.addEventListener('click', () => {
+      const nextTheme = root.classList.contains('dark') ? 'light' : 'dark';
+
+      root.classList.toggle('dark', nextTheme === 'dark');
+      root.style.colorScheme = nextTheme;
+      localStorage.setItem(storageKey, nextTheme);
+      syncButton();
+    });
+
+    syncButton();
+  })();
+`;
+
+const navigation = [
+  { href: '/#ueber-mich', label: 'Über mich' },
+  { href: '/#leistungen', label: 'Leistungen' },
+  { href: '/#technologien', label: 'Technologien' },
+  { href: '/#projekte', label: 'Projekte' },
+  { href: '/#kontakt', label: 'Kontakt' },
+];
+
+const footerLinks = [
+  { href: 'https://github.com/philipbodenbach', label: 'GitHub Profil' },
+  { href: 'https://www.linkedin.com/in/philip-bodenbach', label: 'LinkedIn' },
+  { href: 'https://github.com/philipbodenbach/werk1112', label: 'Werk1112 auf GitHub' },
+  { href: 'https://philipbodenbach.github.io/werk1112/', label: 'Werk1112 Projektseite' },
+  { href: '/impressum/', label: 'Impressum' },
+  { href: '/datenschutz/', label: 'Datenschutz' },
+  { href: '/sitemap.xml', label: 'Sitemap' },
+];
+---
+
+<!doctype html>
+<html lang="de" class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-100">
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline set:html={themeInitScript} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Philip Bodenbach" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content="https://www.philipbodenbach.de/pb_Logos_schwarz.png" />
+    <meta property="og:image:alt" content="Philip Bodenbach Logo" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content="https://www.philipbodenbach.de/pb_Logos_schwarz.png" />
+  </head>
+  <body class="font-sans antialiased">
+    <header class="border-b border-neutral-200 bg-neutral-50/90 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/90">
+      <div class="mx-auto flex max-w-6xl flex-col gap-5 px-5 py-5 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between gap-6">
+          <a href="/" aria-label="Philip Bodenbach Startseite" class="inline-flex shrink-0 items-center">
+            <img
+              src="/pb_Logos_schwarz.png"
+              width="521"
+              height="290"
+              alt="Philip Bodenbach"
+              class="h-[min(290px,34vw)] min-h-24 w-auto max-w-[calc(100vw-7.5rem)] object-contain dark:hidden sm:h-[290px] sm:max-w-none"
+            />
+            <img
+              src="/pb_Logos_grau.png"
+              width="521"
+              height="290"
+              alt="Philip Bodenbach"
+              class="hidden h-[min(290px,34vw)] min-h-24 w-auto max-w-[calc(100vw-7.5rem)] object-contain dark:block sm:h-[290px] sm:max-w-none"
+            />
+          </a>
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              data-theme-toggle
+              aria-label="Dark Mode aktivieren"
+              aria-pressed="false"
+              title="Dark Mode aktivieren"
+              class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-300 text-neutral-700 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+            >
+              <svg class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 4V2M12 22v-2M4 12H2M22 12h-2M5.64 5.64 4.22 4.22M19.78 19.78l-1.42-1.42M18.36 5.64l1.42-1.42M4.22 19.78l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8" />
+              </svg>
+              <svg class="hidden h-5 w-5 dark:block" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M20 14.4A7.8 7.8 0 0 1 9.6 4 8 8 0 1 0 20 14.4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <a
+              href="mailto:info@philipbodenbach.de"
+              class="hidden rounded-md border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950 sm:inline-flex"
+            >
+              Kontakt
+            </a>
+          </div>
+        </div>
+        <nav aria-label="Hauptnavigation" class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-neutral-600 dark:text-neutral-300">
+          {
+            navigation.map((item) => (
+              <a href={item.href} class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950">
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+
+    <main class="bg-white dark:bg-neutral-900">
+      <article class="legal-content mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:px-8">
+        <PrivacyPolicy />
+      </article>
+    </main>
+
+    <footer class="border-t border-neutral-200 dark:border-neutral-800">
+      <div class="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 text-sm text-neutral-600 dark:text-neutral-400 sm:px-6 lg:px-8">
+        <nav aria-label="Footer" class="flex flex-wrap gap-x-5 gap-y-2">
+          {
+            footerLinks.map((link) => (
+              <a href={link.href} class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950">
+                {link.label}
+              </a>
+            ))
+          }
+        </nav>
+        <p>© {new Date().getFullYear()} Philip Bodenbach. Freelance Software Engineer & Software Architect.</p>
+      </div>
+    </footer>
+    <script is:inline set:html={themeToggleScript} />
+  </body>
+</html>

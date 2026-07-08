@@ -1,0 +1,70 @@
+---
+const references = [
+  {
+    name: 'nexum Agency Switzerland AG',
+    href: 'https://www.nexum.ch/',
+    logo: '/references/nexum-logo-white.svg',
+    imageClass: 'h-8 brightness-0 dark:invert sm:h-9',
+  },
+  {
+    name: 'BLUME2000 SE',
+    href: 'https://unternehmen.blume2000.de/',
+    logo: '/references/blume2000-logo.svg',
+    imageClass: 'h-14 brightness-0 dark:invert sm:h-16',
+  },
+  {
+    name: 'RTL Deutschland',
+    href: 'https://company.rtl.com/en/business-units/overview/rtl-deutschland/',
+    logo: '/references/rtl-logo.svg',
+    imageClass: 'h-9 dark:invert sm:h-10',
+  },
+  {
+    name: 'nexum AG',
+    href: 'https://www.nexum.com/de',
+    logo: '/references/nexum-logo-white.svg',
+    imageClass: 'h-8 brightness-0 dark:invert sm:h-9',
+  },
+  {
+    name: 'INFORM GmbH',
+    href: 'https://www.inform-software.com/de/',
+    logo: '/references/inform-logo-white.svg',
+    imageClass: 'h-6 brightness-0 dark:invert sm:h-7',
+  },
+];
+---
+
+<section id="referenzen" class="bg-white text-black dark:bg-black dark:text-white">
+  <div class="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <p class="text-sm font-medium uppercase text-teal-800 dark:text-teal-300">Referenzen</p>
+      <h2 class="mt-3 text-3xl font-semibold leading-tight text-black dark:text-white">
+        Ausgewählte Kunden- und Projektumfelder.
+      </h2>
+    </div>
+
+    <ul class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-5">
+      {
+        references.map((reference) => (
+          <li>
+            <a
+              href={reference.href}
+              aria-label={`${reference.name} Website öffnen`}
+              class="group flex min-h-32 flex-col items-center justify-center gap-5 px-2 py-4 text-center text-black transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-black dark:text-white dark:focus-visible:outline-white"
+            >
+              <img
+                src={reference.logo}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class={`max-w-full object-contain ${reference.imageClass}`}
+              />
+              <span class="text-sm font-medium text-black dark:text-white">
+                {reference.name}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
