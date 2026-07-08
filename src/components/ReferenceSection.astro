@@ -4,52 +4,52 @@ const references = [
     name: 'nexum Agency Switzerland AG',
     href: 'https://www.nexum.ch/',
     logo: '/references/nexum-logo-white.svg',
-    imageClass: 'h-8 brightness-0 dark:invert sm:h-9',
+    imageClass: 'h-8 dark:brightness-0 sm:h-9',
   },
   {
     name: 'BLUME2000 SE',
     href: 'https://unternehmen.blume2000.de/',
     logo: '/references/blume2000-logo.svg',
-    imageClass: 'h-14 brightness-0 dark:invert sm:h-16',
+    imageClass: 'h-14 brightness-0 invert dark:invert-0 sm:h-16',
   },
   {
     name: 'RTL Deutschland',
     href: 'https://company.rtl.com/en/business-units/overview/rtl-deutschland/',
     logo: '/references/rtl-logo.svg',
-    imageClass: 'h-9 dark:invert sm:h-10',
+    imageClass: 'h-9 invert dark:invert-0 sm:h-10',
   },
   {
     name: 'nexum AG',
     href: 'https://www.nexum.com/de',
     logo: '/references/nexum-logo-white.svg',
-    imageClass: 'h-8 brightness-0 dark:invert sm:h-9',
+    imageClass: 'h-8 dark:brightness-0 sm:h-9',
   },
   {
     name: 'INFORM GmbH',
     href: 'https://www.inform-software.com/de/',
     logo: '/references/inform-logo-white.svg',
-    imageClass: 'h-6 brightness-0 dark:invert sm:h-7',
+    imageClass: 'h-6 dark:brightness-0 sm:h-7',
   },
   {
     name: 'Carglass GmbH',
     href: 'https://www.carglass.de/',
     logo: '/references/carglass-logo.svg',
-    imageClass: 'h-8 brightness-0 dark:invert sm:h-9',
+    imageClass: 'h-8 brightness-0 invert dark:invert-0 sm:h-9',
   },
   {
     name: 'cosnova GmbH',
     href: 'https://www.cosnova.com/de/',
     logo: '/references/cosnova-logo.svg',
-    imageClass: 'h-8 brightness-0 dark:invert sm:h-9',
+    imageClass: 'h-8 brightness-0 invert dark:invert-0 sm:h-9',
   },
 ];
 ---
 
-<section id="referenzen" class="bg-white text-black dark:bg-black dark:text-white">
+<section id="referenzen" class="border-t border-neutral-800 bg-black text-white dark:border-neutral-200 dark:bg-white dark:text-neutral-950">
   <div class="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
     <div class="max-w-3xl">
-      <p class="text-sm font-medium uppercase text-teal-800 dark:text-teal-300">Referenzen</p>
-      <h2 class="mt-3 text-3xl font-semibold leading-tight text-black dark:text-white">
+      <p class="text-sm font-medium uppercase text-teal-300 dark:text-teal-800">Referenzen</p>
+      <h2 class="mt-3 text-3xl font-semibold leading-tight text-white dark:text-neutral-950">
         Ausgewählte Kunden- und Projektumfelder.
       </h2>
     </div>
@@ -61,7 +61,7 @@ const references = [
             <a
               href={reference.href}
               aria-label={`${reference.name} Website öffnen`}
-              class="group flex min-h-32 flex-col items-center justify-center gap-5 px-2 py-4 text-center text-black transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-black dark:text-white dark:focus-visible:outline-white"
+              class="group flex min-h-32 flex-col items-center justify-center gap-5 px-2 py-4 text-center text-white transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-white dark:text-neutral-950 dark:focus-visible:outline-neutral-950"
             >
               <img
                 src={reference.logo}
@@ -70,7 +70,7 @@ const references = [
                 decoding="async"
                 class={`max-w-full object-contain ${reference.imageClass}`}
               />
-              <span class="text-sm font-medium text-black dark:text-white">
+              <span class="text-sm font-medium text-white dark:text-neutral-950">
                 {reference.name}
               </span>
             </a>
