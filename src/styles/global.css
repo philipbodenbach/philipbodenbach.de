@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  color-scheme: light dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+}
+
+::selection {
+  background: rgb(153 246 228);
+  color: rgb(23 23 23);
+}
+
+.dark ::selection {
+  background: rgb(17 94 89);
+  color: rgb(245 245 245);
+}
