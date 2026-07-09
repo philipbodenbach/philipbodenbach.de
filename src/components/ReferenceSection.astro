@@ -43,14 +43,25 @@ const references = [
     imageClass: 'h-8 brightness-0 invert dark:invert-0 sm:h-9',
   },
 ];
+
+interface Props {
+  content: {
+    label: string;
+    heading: string;
+    description: string;
+    linkAriaLabel: string;
+  };
+}
+
+const { content } = Astro.props;
 ---
 
 <section id="referenzen" class="border-t border-neutral-800 bg-black text-white dark:border-neutral-200 dark:bg-white dark:text-neutral-950">
   <div class="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
     <div class="max-w-3xl">
-      <p class="text-sm font-medium uppercase text-teal-300 dark:text-teal-800">Referenzen</p>
+      <p class="text-sm font-medium uppercase text-teal-300 dark:text-teal-800">{content.label}</p>
       <h2 class="mt-3 text-3xl font-semibold leading-tight text-white dark:text-neutral-950">
-        Ausgewählte Kunden- und Projektumfelder.
+        {content.heading}
       </h2>
     </div>
 
@@ -60,7 +71,7 @@ const references = [
           <li>
             <a
               href={reference.href}
-              aria-label={`${reference.name} Website öffnen`}
+              aria-label={content.linkAriaLabel.replace('{name}', reference.name)}
               class="group flex min-h-32 flex-col items-center justify-center gap-5 px-2 py-4 text-center text-white transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-white dark:text-neutral-950 dark:focus-visible:outline-neutral-950"
             >
               <img
@@ -79,7 +90,7 @@ const references = [
       }
     </ul>
     <p class="mt-8 max-w-3xl text-sm leading-6 text-white/75 dark:text-neutral-700">
-      Auswahl von Unternehmen und Organisationen, für die ich im Rahmen freiberuflicher Projekte tätig war.
+      {content.description}
     </p>
   </div>
 </section>

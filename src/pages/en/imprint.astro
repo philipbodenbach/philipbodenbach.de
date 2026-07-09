@@ -1,17 +1,23 @@
 ---
-import "../styles/global.css";
+import "../../styles/global.css";
 
-const canonicalUrl = "https://www.philipbodenbach.de/impressum/";
-const pageTitle = "Impressum | Philip Bodenbach";
+const canonicalUrl = "https://www.philipbodenbach.de/en/imprint/";
+const pageTitle = "Imprint | Philip Bodenbach";
 const pageDescription =
-  "Impressum von philipbodenbach.de, Philip Bodenbach, Eschweiler.";
+  "Imprint for philipbodenbach.de, Philip Bodenbach, Eschweiler.";
 const alternateLinks = [
-  { hreflang: "de", href: canonicalUrl },
+  {
+    hreflang: "de",
+    href: "https://www.philipbodenbach.de/impressum/",
+  },
   {
     hreflang: "en",
-    href: "https://www.philipbodenbach.de/en/imprint/",
+    href: canonicalUrl,
   },
-  { hreflang: "x-default", href: canonicalUrl },
+  {
+    hreflang: "x-default",
+    href: "https://www.philipbodenbach.de/impressum/",
+  },
 ];
 const themeInitScript = `
   (() => {
@@ -47,7 +53,7 @@ const themeToggleScript = `
 
     const syncButton = () => {
       const isDark = root.classList.contains('dark');
-      const label = isDark ? 'Light Mode aktivieren' : 'Dark Mode aktivieren';
+      const label = isDark ? 'Activate light mode' : 'Activate dark mode';
 
       button.setAttribute('aria-label', label);
       button.setAttribute('aria-pressed', String(isDark));
@@ -68,34 +74,34 @@ const themeToggleScript = `
 `;
 
 const navigation = [
-  { href: "/#ueber-mich", label: "Über mich" },
-  { href: "/#referenzen", label: "Referenzen" },
-  { href: "/#leistungen", label: "Leistungen" },
-  { href: "/#technologien", label: "Technologien" },
-  { href: "/#projekte", label: "Projekte" },
-  { href: "/#kontakt", label: "Kontakt" },
+  { href: "/en/#ueber-mich", label: "About" },
+  { href: "/en/#referenzen", label: "References" },
+  { href: "/en/#leistungen", label: "Services" },
+  { href: "/en/#technologien", label: "Technologies" },
+  { href: "/en/#projekte", label: "Projects" },
+  { href: "/en/#kontakt", label: "Contact" },
 ];
 
 const footerLinks = [
-  { href: "https://github.com/philipbodenbach", label: "GitHub Profil" },
+  { href: "https://github.com/philipbodenbach", label: "GitHub Profile" },
   { href: "https://www.linkedin.com/in/philip-bodenbach", label: "LinkedIn" },
   {
     href: "https://github.com/philipbodenbach/werk1112",
-    label: "Werk1112 auf GitHub",
+    label: "Werk1112 on GitHub",
   },
   {
     href: "https://philipbodenbach.github.io/werk1112/",
-    label: "Werk1112 Projektseite",
+    label: "Werk1112 project page",
   },
-  { href: "/impressum/", label: "Impressum" },
-  { href: "/datenschutz/", label: "Datenschutz" },
+  { href: "/en/imprint/", label: "Imprint" },
+  { href: "/en/privacy/", label: "Privacy Policy" },
   { href: "/sitemap.xml", label: "Sitemap" },
 ];
 ---
 
 <!doctype html>
 <html
-  lang="de"
+  lang="en"
   class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-100"
 >
   <head>
@@ -116,7 +122,7 @@ const footerLinks = [
     <meta name="robots" content="index, follow" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="de_DE" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="Philip Bodenbach" />
     <meta property="og:title" content={pageTitle} />
@@ -144,8 +150,8 @@ const footerLinks = [
       >
         <div class="flex items-center justify-between gap-6">
           <a
-            href="/"
-            aria-label="Philip Bodenbach Startseite"
+            href="/en/"
+            aria-label="Philip Bodenbach home page"
             class="inline-flex shrink-0 items-center"
           >
             <img
@@ -167,9 +173,9 @@ const footerLinks = [
             <button
               type="button"
               data-theme-toggle
-              aria-label="Dark Mode aktivieren"
+              aria-label="Activate dark mode"
               aria-pressed="false"
-              title="Dark Mode aktivieren"
+              title="Activate dark mode"
               class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-300 text-sm font-medium text-neutral-700 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
             >
               <svg
@@ -205,24 +211,24 @@ const footerLinks = [
               </svg>
             </button>
             <a
-              href="/en/imprint/"
-              hreflang="en"
-              lang="en"
-              aria-label="English version"
+              href="/impressum/"
+              hreflang="de"
+              lang="de"
+              aria-label="German version"
               class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-300 text-sm font-medium text-neutral-700 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
             >
-              EN
+              DE
             </a>
             <a
               href="mailto:info@philipbodenbach.de"
               class="hidden rounded-md border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950 sm:inline-flex"
             >
-              Kontakt
+              Contact
             </a>
           </div>
         </div>
         <nav
-          aria-label="Hauptnavigation"
+          aria-label="Main navigation"
           class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-neutral-600 dark:text-neutral-300"
         >
           {
@@ -250,7 +256,7 @@ const footerLinks = [
           <h1
             class="mt-3 text-5xl font-semibold leading-[1.05] text-neutral-950 dark:text-white sm:text-6xl"
           >
-            Impressum
+            Imprint
           </h1>
         </div>
       </section>
@@ -270,7 +276,7 @@ const footerLinks = [
 
             <div>
               <p>
-                Telefon:
+                Phone:
                 <a
                   class="font-medium text-neutral-950 hover:text-teal-800 dark:text-white dark:hover:text-teal-200"
                   href="tel:+4924039939606"
@@ -279,7 +285,7 @@ const footerLinks = [
                 </a>
               </p>
               <p>
-                Mobil:
+                Mobile:
                 <a
                   class="font-medium text-neutral-950 hover:text-teal-800 dark:text-white dark:hover:text-teal-200"
                   href="tel:+491728295357"
@@ -302,7 +308,7 @@ const footerLinks = [
               <h2
                 class="text-base font-medium uppercase text-neutral-500 dark:text-neutral-400"
               >
-                Umsatzsteueridentifikationsnummer
+                VAT identification number
               </h2>
               <p class="mt-2">DE 273451840</p>
             </div>
@@ -311,7 +317,7 @@ const footerLinks = [
               <h2
                 class="text-base font-medium uppercase text-neutral-500 dark:text-neutral-400"
               >
-                Inhaltlich Verantwortlicher gemäß § 10 Absatz 3 MDStV
+                Responsible for content
               </h2>
               <p class="mt-2">Philip Bodenbach</p>
             </div>
@@ -320,13 +326,12 @@ const footerLinks = [
               <h2
                 class="text-base font-medium uppercase text-neutral-500 dark:text-neutral-400"
               >
-                Haftungshinweis
+                Liability notice
               </h2>
               <p class="mt-2">
-                Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine
-                Haftung für die Inhalte externer Links. Für den Inhalt der
-                verlinkten Seiten sind ausschließlich deren Betreiber
-                verantwortlich.
+                Despite careful content control, I assume no liability for the
+                contents of external links. The operators of the linked pages
+                are solely responsible for their content.
               </p>
             </div>
           </div>

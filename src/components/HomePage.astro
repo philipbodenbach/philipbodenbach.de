@@ -1,0 +1,517 @@
+---
+import "../styles/global.css";
+import ReferenceSection from "./ReferenceSection.astro";
+import type { HomeContent } from "../i18n/home";
+
+interface Props {
+  content: HomeContent;
+}
+
+const { content } = Astro.props;
+const pageTitle = content.seo.title;
+const pageDescription = content.seo.description;
+const canonicalUrl = content.canonicalUrl;
+const logoImageUrl = "https://www.philipbodenbach.de/pb_Logos_schwarz.png";
+const themeInitScript = `
+  (() => {
+    const storageKey = 'pb-theme';
+    const root = document.documentElement;
+
+    try {
+      const storedTheme = localStorage.getItem(storageKey);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = storedTheme === 'dark' || storedTheme === 'light'
+        ? storedTheme
+        : prefersDark
+          ? 'dark'
+          : 'light';
+
+      root.classList.toggle('dark', theme === 'dark');
+      root.style.colorScheme = theme;
+    } catch {
+      root.classList.remove('dark');
+      root.style.colorScheme = 'light';
+    }
+  })();
+`;
+const themeToggleLabels = JSON.stringify(content.themeToggle);
+const themeToggleScript = `
+  (() => {
+    const storageKey = 'pb-theme';
+    const labels = ${themeToggleLabels};
+    const root = document.documentElement;
+    const button = document.querySelector('[data-theme-toggle]');
+
+    if (!button) {
+      return;
+    }
+
+    const syncButton = () => {
+      const isDark = root.classList.contains('dark');
+      const label = isDark ? labels.activateLight : labels.activateDark;
+
+      button.setAttribute('aria-label', label);
+      button.setAttribute('aria-pressed', String(isDark));
+      button.setAttribute('title', label);
+    };
+
+    button.addEventListener('click', () => {
+      const nextTheme = root.classList.contains('dark') ? 'light' : 'dark';
+
+      root.classList.toggle('dark', nextTheme === 'dark');
+      root.style.colorScheme = nextTheme;
+      localStorage.setItem(storageKey, nextTheme);
+      syncButton();
+    });
+
+    syncButton();
+  })();
+`;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Philip Bodenbach",
+  url: canonicalUrl,
+  image: logoImageUrl,
+  jobTitle: content.schema.jobTitle,
+  email: "mailto:info@philipbodenbach.de",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "DE",
+  },
+  knowsAbout: content.schema.knowsAbout,
+  sameAs: [
+    "https://github.com/philipbodenbach",
+    "https://www.linkedin.com/in/philip-bodenbach",
+  ],
+};
+---
+
+<!doctype html>
+<html
+  lang={content.lang}
+  class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-100"
+>
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline set:html={themeInitScript} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    {
+      content.alternateLinks.map((link) => (
+        <link rel="alternate" hreflang={link.hreflang} href={link.href} />
+      ))
+    }
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={content.ogLocale} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Philip Bodenbach" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={logoImageUrl} />
+    <meta property="og:image:alt" content="Philip Bodenbach Logo" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={logoImageUrl} />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(personSchema)}
+    />
+  </head>
+  <body class="font-sans antialiased">
+    <header
+      class="border-b border-neutral-200 bg-white backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/90"
+    >
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-[clamp(34px,4vw,55px)] px-5 pb-[clamp(34px,5vw,55px)] pt-[clamp(34px,6vw,89px)] sm:px-6 lg:px-8"
+      >
+        <div class="flex items-center justify-between gap-6">
+          <a
+            href={content.homeHref}
+            aria-label={content.logoAriaLabel}
+            class="inline-flex shrink-0 items-center"
+          >
+            <img
+              src="/pb_Logos_bm_schwarz.png"
+              width="521"
+              height="200"
+              alt="Philip Bodenbach"
+              class="h-auto w-[clamp(144px,18vw,233px)] object-contain dark:hidden"
+            />
+            <img
+              src="/pb_Logos_bm_grau.png"
+              width="521"
+              height="200"
+              alt="Philip Bodenbach"
+              class="hidden h-auto w-[clamp(144px,18vw,233px)] object-contain dark:block"
+            />
+          </a>
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              data-theme-toggle
+              aria-label={content.themeToggle.activateDark}
+              aria-pressed="false"
+              title={content.themeToggle.activateDark}
+              class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-300 text-sm font-medium text-neutral-700 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+            >
+              <svg
+                class="h-5 w-5 dark:hidden"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 4V2M12 22v-2M4 12H2M22 12h-2M5.64 5.64 4.22 4.22M19.78 19.78l-1.42-1.42M18.36 5.64l1.42-1.42M4.22 19.78l1.42-1.42"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"></path>
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4.2"
+                  stroke="currentColor"
+                  stroke-width="1.8"></circle>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 dark:block"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M20 14.4A7.8 7.8 0 0 1 9.6 4 8 8 0 1 0 20 14.4Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <a
+              href={content.languageSwitch.href}
+              hreflang={content.languageSwitch.hreflang}
+              lang={content.languageSwitch.hreflang}
+              aria-label={content.languageSwitch.ariaLabel}
+              class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-300 text-sm font-medium text-neutral-700 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+            >
+              {content.languageSwitch.label}
+            </a>
+            <a
+              href="mailto:info@philipbodenbach.de"
+              class="hidden rounded-md border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950 sm:inline-flex"
+            >
+              {content.headerContactLabel}
+            </a>
+          </div>
+        </div>
+        <nav
+          aria-label={content.navigationLabel}
+          class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-neutral-600 dark:text-neutral-300"
+        >
+          {
+            content.navigation.map((item) => (
+              <a
+                href={item.href}
+                class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section
+        class="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:py-24"
+      >
+        <div class="max-w-3xl">
+          <p
+            class="mb-5 text-base font-medium text-teal-800 dark:text-teal-300"
+          >
+            {content.hero.eyebrow}
+          </p>
+          <h1
+            class="text-5xl font-semibold leading-[1.05] text-neutral-950 dark:text-white sm:text-6xl"
+          >
+            {content.hero.title}
+          </h1>
+          <p
+            class="mt-8 max-w-2xl text-xl leading-8 text-neutral-700 dark:text-neutral-300"
+          >
+            {
+              content.hero.description.map((line, index) => (
+                <>
+                  {index > 0 && <br />}
+                  {line}
+                </>
+              ))
+            }
+          </p>
+          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="mailto:info@philipbodenbach.de"
+              class="inline-flex justify-center rounded-md bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+            >
+              {content.hero.primaryCta}
+            </a>
+            <a
+              href="#leistungen"
+              class="inline-flex justify-center rounded-md border border-neutral-300 px-5 py-3 text-sm font-medium text-neutral-800 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+            >
+              {content.hero.secondaryCta}
+            </a>
+          </div>
+        </div>
+        <aside
+          class="border-t border-neutral-200 pt-8 dark:border-neutral-800 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0"
+        >
+          <p
+            class="text-sm font-medium uppercase text-neutral-500 dark:text-neutral-400"
+          >
+            {content.focus.label}
+          </p>
+          <dl class="mt-6 space-y-6">
+            <div>
+              <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                {content.focus.workLabel}
+              </dt>
+              <dd
+                class="mt-1 text-lg font-medium text-neutral-950 dark:text-white"
+              >
+                {content.focus.workText}
+              </dd>
+            </div>
+            <div>
+              <dt class="text-sm text-neutral-500 dark:text-neutral-400">
+                {content.focus.focusLabel}
+              </dt>
+              <dd
+                class="mt-1 text-lg font-medium text-neutral-950 dark:text-white"
+              >
+                {content.focus.focusText}
+              </dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+
+      <section
+        id="ueber-mich"
+        class="border-t border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"
+      >
+        <div
+          class="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 lg:grid-cols-[0.35fr_0.65fr] lg:px-8"
+        >
+          <div>
+            <p
+              class="text-sm font-medium uppercase text-teal-800 dark:text-teal-300"
+            >
+              {content.about.label}
+            </p>
+            <h2
+              class="mt-3 text-3xl font-semibold leading-tight text-neutral-950 dark:text-white"
+            >
+              {content.about.heading}
+            </h2>
+          </div>
+          <div
+            class="space-y-5 text-lg leading-8 text-neutral-700 dark:text-neutral-300"
+          >
+            {content.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        </div>
+      </section>
+
+      <ReferenceSection content={content.references} />
+
+      <section
+        id="leistungen"
+        class="border-t border-neutral-200 dark:border-neutral-800"
+      >
+        <div
+          class="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.65fr_0.35fr] lg:px-8"
+        >
+          <div class="lg:order-2">
+            <p
+              class="text-sm font-medium uppercase text-teal-800 dark:text-teal-300"
+            >
+              {content.services.label}
+            </p>
+            <h2
+              class="mt-3 text-3xl font-semibold leading-tight text-neutral-950 dark:text-white"
+            >
+              {content.services.heading}
+            </h2>
+          </div>
+          <div
+            class="text-lg leading-8 text-neutral-700 dark:text-neutral-300 lg:order-1"
+          >
+            <ul class="grid gap-x-8 gap-y-3 sm:grid-cols-2">
+              {
+                content.services.items.map((service) => (
+                  <li class="border-b border-neutral-200 pb-3 font-medium text-neutral-900 dark:border-neutral-800 dark:text-neutral-100">
+                    {service}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="technologien"
+        class="border-t border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"
+      >
+        <div
+          class="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 lg:grid-cols-[0.35fr_0.65fr] lg:px-8"
+        >
+          <div>
+            <p
+              class="text-sm font-medium uppercase text-teal-800 dark:text-teal-300"
+            >
+              {content.technologies.label}
+            </p>
+            <h2
+              class="mt-3 text-3xl font-semibold leading-tight text-neutral-950 dark:text-white"
+            >
+              {content.technologies.heading}
+            </h2>
+          </div>
+          <div class="text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+            <ul class="grid gap-x-8 gap-y-3 sm:grid-cols-2">
+              {
+                content.technologies.items.map((technology) => (
+                  <li class="border-b border-neutral-200 pb-3 dark:border-neutral-800">
+                    {technology}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="projekte"
+        class="border-t border-neutral-200 dark:border-neutral-800"
+      >
+        <div class="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
+          <div class="max-w-3xl">
+            <p
+              class="text-sm font-medium uppercase text-teal-800 dark:text-teal-300"
+            >
+              {content.projects.label}
+            </p>
+            <h2
+              class="mt-3 text-3xl font-semibold leading-tight text-neutral-950 dark:text-white"
+            >
+              {content.projects.heading}
+            </h2>
+            <p
+              class="mt-5 text-lg leading-8 text-neutral-700 dark:text-neutral-300"
+            >
+              {content.projects.description}
+            </p>
+          </div>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="https://github.com/philipbodenbach/werk1112"
+              class="inline-flex justify-center rounded-md border border-neutral-300 px-5 py-3 text-sm font-medium text-neutral-800 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+            >
+              {content.projects.githubLabel}
+            </a>
+            <a
+              href="https://philipbodenbach.github.io/werk1112/"
+              class="inline-flex justify-center rounded-md border border-neutral-300 px-5 py-3 text-sm font-medium text-neutral-800 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+            >
+              {content.projects.projectPageLabel}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="kontakt"
+        class="border-t border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"
+      >
+        <div
+          class="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 lg:grid-cols-[0.35fr_0.65fr] lg:px-8"
+        >
+          <div>
+            <p
+              class="text-sm font-medium uppercase text-teal-800 dark:text-teal-300"
+            >
+              {content.contact.label}
+            </p>
+            <h2
+              class="mt-3 text-3xl font-semibold leading-tight text-neutral-950 dark:text-white"
+            >
+              {content.contact.heading}
+            </h2>
+          </div>
+          <div
+            class="divide-y divide-neutral-200 border-y border-neutral-200 dark:divide-neutral-800 dark:border-neutral-800"
+          >
+            {
+              content.contact.links.map((link) => (
+                <div class="grid gap-1 py-4 sm:grid-cols-[9rem_1fr]">
+                  <span class="text-sm text-neutral-500 dark:text-neutral-400">
+                    {link.label}
+                  </span>
+                  <a
+                    href={link.href}
+                    class="break-words font-medium text-neutral-950 transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-white dark:text-white dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-900"
+                  >
+                    {link.text}
+                  </a>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-neutral-200 dark:border-neutral-800">
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 text-sm text-neutral-600 dark:text-neutral-400 sm:px-6 lg:px-8"
+      >
+        <nav
+          aria-label={content.footer.ariaLabel}
+          class="flex flex-wrap gap-x-5 gap-y-2"
+        >
+          {
+            content.footer.links.map((link) => (
+              <a
+                href={link.href}
+                class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </nav>
+        <p>
+          © {new Date().getFullYear()} Philip Bodenbach. {
+            content.footer.copyrightRole
+          }
+        </p>
+      </div>
+    </footer>
+    <script is:inline set:html={themeToggleScript} />
+  </body>
+</html>

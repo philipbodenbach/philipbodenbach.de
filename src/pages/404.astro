@@ -1,0 +1,236 @@
+---
+import "../styles/global.css";
+
+Astro.response.status = 404;
+
+const pageTitle = "Seite nicht gefunden | Philip Bodenbach";
+const pageDescription = "Die angeforderte Seite wurde nicht gefunden.";
+const themeInitScript = `
+  (() => {
+    const storageKey = 'pb-theme';
+    const root = document.documentElement;
+
+    try {
+      const storedTheme = localStorage.getItem(storageKey);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = storedTheme === 'dark' || storedTheme === 'light'
+        ? storedTheme
+        : prefersDark
+          ? 'dark'
+          : 'light';
+
+      root.classList.toggle('dark', theme === 'dark');
+      root.style.colorScheme = theme;
+    } catch {
+      root.classList.remove('dark');
+      root.style.colorScheme = 'light';
+    }
+  })();
+`;
+const themeToggleScript = `
+  (() => {
+    const storageKey = 'pb-theme';
+    const root = document.documentElement;
+    const button = document.querySelector('[data-theme-toggle]');
+
+    if (!button) {
+      return;
+    }
+
+    const syncButton = () => {
+      const isDark = root.classList.contains('dark');
+      const label = isDark ? 'Light Mode aktivieren' : 'Dark Mode aktivieren';
+
+      button.setAttribute('aria-label', label);
+      button.setAttribute('aria-pressed', String(isDark));
+      button.setAttribute('title', label);
+    };
+
+    button.addEventListener('click', () => {
+      const nextTheme = root.classList.contains('dark') ? 'light' : 'dark';
+
+      root.classList.toggle('dark', nextTheme === 'dark');
+      root.style.colorScheme = nextTheme;
+      localStorage.setItem(storageKey, nextTheme);
+      syncButton();
+    });
+
+    syncButton();
+  })();
+`;
+---
+
+<!doctype html>
+<html
+  lang="de"
+  class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-100"
+>
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline set:html={themeInitScript} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body class="font-sans antialiased">
+    <header
+      class="border-b border-neutral-200 bg-white backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/90"
+    >
+      <div
+        class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 pb-[clamp(34px,5vw,55px)] pt-[clamp(34px,6vw,89px)] sm:px-6 lg:px-8"
+      >
+        <a
+          href="/"
+          aria-label="Philip Bodenbach Startseite"
+          class="inline-flex shrink-0 items-center"
+        >
+          <img
+            src="/pb_Logos_bm_schwarz.png"
+            width="521"
+            height="200"
+            alt="Philip Bodenbach"
+            class="h-auto w-[clamp(144px,18vw,233px)] object-contain dark:hidden"
+          />
+          <img
+            src="/pb_Logos_bm_grau.png"
+            width="521"
+            height="200"
+            alt="Philip Bodenbach"
+            class="hidden h-auto w-[clamp(144px,18vw,233px)] object-contain dark:block"
+          />
+        </a>
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            data-theme-toggle
+            aria-label="Dark Mode aktivieren"
+            aria-pressed="false"
+            title="Dark Mode aktivieren"
+            class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-300 text-sm font-medium text-neutral-700 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+          >
+            <svg
+              class="h-5 w-5 dark:hidden"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 4V2M12 22v-2M4 12H2M22 12h-2M5.64 5.64 4.22 4.22M19.78 19.78l-1.42-1.42M18.36 5.64l1.42-1.42M4.22 19.78l1.42-1.42"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"></path>
+              <circle
+                cx="12"
+                cy="12"
+                r="4.2"
+                stroke="currentColor"
+                stroke-width="1.8"></circle>
+            </svg>
+            <svg
+              class="hidden h-5 w-5 dark:block"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M20 14.4A7.8 7.8 0 0 1 9.6 4 8 8 0 1 0 20 14.4Z"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <a
+            href="/en/"
+            hreflang="en"
+            lang="en"
+            aria-label="English version"
+            class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-300 text-sm font-medium text-neutral-700 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+          >
+            EN
+          </a>
+          <a
+            href="mailto:info@philipbodenbach.de"
+            class="hidden rounded-md border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950 sm:inline-flex"
+          >
+            Kontakt
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section
+        class="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.35fr_0.65fr] lg:px-8 lg:py-24"
+      >
+        <div>
+          <p
+            class="text-sm font-medium uppercase text-teal-800 dark:text-teal-300"
+          >
+            404
+          </p>
+          <h1
+            class="mt-3 text-5xl font-semibold leading-[1.05] text-neutral-950 dark:text-white sm:text-6xl"
+          >
+            Seite nicht gefunden.
+          </h1>
+        </div>
+        <div class="max-w-2xl text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+          <p>
+            Die angeforderte Seite existiert nicht oder wurde verschoben.
+          </p>
+          <p class="mt-5">
+            Page not found. The page may have moved, or the address may be
+            incorrect.
+          </p>
+          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="/"
+              class="inline-flex justify-center rounded-md bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+            >
+              Zur Startseite
+            </a>
+            <a
+              href="/en/"
+              hreflang="en"
+              lang="en"
+              class="inline-flex justify-center rounded-md border border-neutral-300 px-5 py-3 text-sm font-medium text-neutral-800 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+            >
+              English home
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-neutral-200 dark:border-neutral-800">
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 text-sm text-neutral-600 dark:text-neutral-400 sm:px-6 lg:px-8"
+      >
+        <nav aria-label="Footer" class="flex flex-wrap gap-x-5 gap-y-2">
+          <a
+            href="/impressum/"
+            class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+          >
+            Impressum
+          </a>
+          <a
+            href="/datenschutz/"
+            class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+          >
+            Datenschutz
+          </a>
+        </nav>
+        <p>
+          © {new Date().getFullYear()} Philip Bodenbach. Freelance Software
+          Engineer & Software Architect.
+        </p>
+      </div>
+    </footer>
+    <script is:inline set:html={themeToggleScript} />
+  </body>
+</html>
