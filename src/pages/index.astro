@@ -207,10 +207,10 @@ const personSchema = {
   </head>
   <body class="font-sans antialiased">
     <header
-      class="border-b border-neutral-200 bg-neutral-50/90 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/90"
+      class="border-b border-neutral-200 bg-white backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/90"
     >
       <div
-        class="mx-auto flex max-w-6xl flex-col gap-5 px-5 py-5 sm:px-6 lg:px-8"
+        class="mx-auto flex max-w-6xl flex-col gap-[clamp(34px,4vw,55px)] px-5 pb-[clamp(34px,5vw,55px)] pt-[clamp(34px,6vw,89px)] sm:px-6 lg:px-8"
       >
         <div class="flex items-center justify-between gap-6">
           <a
@@ -219,18 +219,18 @@ const personSchema = {
             class="inline-flex shrink-0 items-center"
           >
             <img
-              src="/pb_Logos_schwarz.png"
+              src="/pb_Logos_bm_schwarz.png"
               width="521"
-              height="290"
+              height="200"
               alt="Philip Bodenbach"
-              class="h-[min(290px,34vw)] min-h-24 w-auto max-w-[calc(100vw-7.5rem)] object-contain dark:hidden sm:h-[290px] sm:max-w-none"
+              class="h-auto w-[clamp(144px,18vw,233px)] object-contain dark:hidden"
             />
             <img
-              src="/pb_Logos_grau.png"
+              src="/pb_Logos_bm_grau.png"
               width="521"
-              height="290"
+              height="200"
               alt="Philip Bodenbach"
-              class="hidden h-[min(290px,34vw)] min-h-24 w-auto max-w-[calc(100vw-7.5rem)] object-contain dark:block sm:h-[290px] sm:max-w-none"
+              class="hidden h-auto w-[clamp(144px,18vw,233px)] object-contain dark:block"
             />
           </a>
           <div class="flex items-center gap-2">
