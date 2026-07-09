@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import ReferenceSection from "./ReferenceSection.astro";
+import SeoHead from "./SeoHead.astro";
 import type { HomeContent } from "../i18n/home";
 
 interface Props {
@@ -98,31 +99,13 @@ const personSchema = {
     <script is:inline set:html={themeInitScript} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href={canonicalUrl} />
-    {
-      content.alternateLinks.map((link) => (
-        <link rel="alternate" hreflang={link.hreflang} href={link.href} />
-      ))
-    }
-    <meta name="robots" content="index, follow" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content={content.ogLocale} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:site_name" content="Philip Bodenbach" />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={pageDescription} />
-    <meta property="og:image" content={logoImageUrl} />
-    <meta property="og:image:alt" content="Philip Bodenbach Logo" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content={logoImageUrl} />
+    <SeoHead
+      title={pageTitle}
+      description={pageDescription}
+      canonicalUrl={canonicalUrl}
+      alternateLinks={content.alternateLinks}
+      locale={content.ogLocale}
+    />
 
     <script
       type="application/ld+json"

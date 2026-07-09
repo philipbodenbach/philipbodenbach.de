@@ -29,9 +29,10 @@ export const homeContent = {
     ogLocale: "de_DE",
     alternateLinks,
     seo: {
-      title: "Philip Bodenbach | Freelance Software Engineer & Software Architect",
+      title:
+        "Philip Bodenbach | Freelance Software Engineer & Software Architect",
       description:
-        "Philip Bodenbach entwickelt individuelle Software, Webanwendungen und Backend-Systeme. Freelance Software Engineer und Software Architect aus Deutschland.",
+        "Individuelle Software, Webanwendungen und Backend-Systeme. Seit 1997 in der Softwareentwicklung, seit 2007 freiberuflich.",
     },
     themeToggle: {
       activateDark: "Dark Mode aktivieren",
@@ -70,7 +71,8 @@ export const homeContent = {
       workText:
         "Planung, Entwicklung und langfristige Begleitung von Softwareprojekten.",
       focusLabel: "Fokus",
-      focusText: "Wartbare Architekturen, stabile Backends, klare Schnittstellen.",
+      focusText:
+        "Wartbare Architekturen, stabile Backends, klare Schnittstellen.",
     },
     about: {
       label: "Über mich",
@@ -185,9 +187,10 @@ export const homeContent = {
     ogLocale: "en_US",
     alternateLinks,
     seo: {
-      title: "Philip Bodenbach | Freelance Software Engineer & Software Architect",
+      title:
+        "Philip Bodenbach | Freelance Software Engineer & Software Architect",
       description:
-        "Philip Bodenbach builds custom software, web applications and backend systems. Freelance Software Engineer and Software Architect based in Germany.",
+        "Custom software, web applications and backend systems. Software development since 1997, freelance since 2007.",
     },
     themeToggle: {
       activateDark: "Activate dark mode",
@@ -227,7 +230,8 @@ export const homeContent = {
       workText:
         "Planning, development and long-term support for software projects.",
       focusLabel: "Focus",
-      focusText: "Maintainable architectures. Stable backends. Clear interfaces.",
+      focusText:
+        "Maintainable architectures. Stable backends. Clear interfaces.",
     },
     about: {
       label: "About",
@@ -248,7 +252,8 @@ export const homeContent = {
     },
     services: {
       label: "Services",
-      heading: "Software development, architecture and technical implementation.",
+      heading:
+        "Software development, architecture and technical implementation.",
       items: [
         "Custom software development",
         "Web applications",
