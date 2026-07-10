@@ -1,10 +1,10 @@
-const siteUrl = "https://www.philipbodenbach.de";
+import {
+  SITEMAP_INDEX_PATH,
+  absoluteUrl,
+  alternateLinksFor,
+} from "../lib/seo";
 
-const alternateLinks = [
-  { hreflang: "de", href: `${siteUrl}/` },
-  { hreflang: "en", href: `${siteUrl}/en/` },
-  { hreflang: "x-default", href: `${siteUrl}/` },
-];
+const alternateLinks = alternateLinksFor("home");
 
 const technologies = [
   "PHP",
@@ -25,7 +25,7 @@ export const homeContent = {
   de: {
     lang: "de",
     homeHref: "/",
-    canonicalUrl: `${siteUrl}/`,
+    canonicalUrl: absoluteUrl("/"),
     ogLocale: "de_DE",
     alternateLinks,
     seo: {
@@ -121,8 +121,8 @@ export const homeContent = {
       links: [
         {
           label: "Website",
-          href: "https://www.philipbodenbach.de",
-          text: "www.philipbodenbach.de",
+          href: absoluteUrl("/"),
+          text: "philipbodenbach.de",
         },
         {
           label: "E-Mail",
@@ -159,7 +159,7 @@ export const homeContent = {
         },
         { href: "/impressum/", label: "Impressum" },
         { href: "/datenschutz/", label: "Datenschutz" },
-        { href: "/sitemap.xml", label: "Sitemap" },
+        { href: SITEMAP_INDEX_PATH, label: "Sitemap" },
       ],
       copyrightRole: "Freelance Software Engineer & Software Architect.",
     },
@@ -183,7 +183,7 @@ export const homeContent = {
   en: {
     lang: "en",
     homeHref: "/en/",
-    canonicalUrl: `${siteUrl}/en/`,
+    canonicalUrl: absoluteUrl("/en/"),
     ogLocale: "en_US",
     alternateLinks,
     seo: {
@@ -283,8 +283,8 @@ export const homeContent = {
       links: [
         {
           label: "Website",
-          href: "https://www.philipbodenbach.de",
-          text: "www.philipbodenbach.de",
+          href: absoluteUrl("/"),
+          text: "philipbodenbach.de",
         },
         {
           label: "E-Mail",
@@ -321,7 +321,7 @@ export const homeContent = {
         },
         { href: "/en/imprint/", label: "Imprint" },
         { href: "/en/privacy/", label: "Privacy Policy" },
-        { href: "/sitemap.xml", label: "Sitemap" },
+        { href: SITEMAP_INDEX_PATH, label: "Sitemap" },
       ],
       copyrightRole: "Freelance Software Engineer & Software Architect.",
     },

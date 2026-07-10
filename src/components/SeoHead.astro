@@ -1,4 +1,6 @@
 ---
+import { OG_IMAGE_URL, SITEMAP_URL } from "../lib/seo";
+
 interface AlternateLink {
   hreflang: string;
   href: string;
@@ -24,9 +26,23 @@ const {
   locale,
   robots = "index, follow",
   ogType = "website",
-  imageUrl = "https://www.philipbodenbach.de/og/philip-bodenbach-og.png",
+  imageUrl = OG_IMAGE_URL,
   imageAlt = "Philip Bodenbach logo with Software Engineer and Software Architect text",
 } = Astro.props;
+
+const ogLocaleAlternates = alternateLinks
+  .map((link) => {
+    if (link.hreflang === "de") {
+      return "de_DE";
+    }
+
+    if (link.hreflang === "en") {
+      return "en_US";
+    }
+
+    return undefined;
+  })
+  .filter((alternateLocale) => alternateLocale && alternateLocale !== locale);
 ---
 
 <meta name="viewport" content="width=device-width" />
@@ -34,6 +50,7 @@ const {
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalUrl} />
+<link rel="sitemap" href={SITEMAP_URL} />
 {
   alternateLinks.map((link) => (
     <link rel="alternate" hreflang={link.hreflang} href={link.href} />
@@ -43,6 +60,11 @@ const {
 
 <meta property="og:type" content={ogType} />
 <meta property="og:locale" content={locale} />
+{
+  ogLocaleAlternates.map((alternateLocale) => (
+    <meta property="og:locale:alternate" content={alternateLocale} />
+  ))
+}
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:site_name" content="Philip Bodenbach" />
 <meta property="og:title" content={title} />

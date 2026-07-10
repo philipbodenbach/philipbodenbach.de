@@ -10,7 +10,7 @@ This Privacy Policy explains which personal data is processed when you visit thi
 ## Controller
 
 Philip Bodenbach  
-Website: https://www.philipbodenbach.de  
+Website: https://philipbodenbach.de  
 E-Mail: info@philipbodenbach.de
 
 ## Hosting via Netlify

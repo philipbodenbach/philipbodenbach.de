@@ -10,7 +10,7 @@ Diese Datenschutzerklärung informiert darüber, welche personenbezogenen Daten 
 ## Verantwortlicher
 
 Philip Bodenbach  
-Website: https://www.philipbodenbach.de  
+Website: https://philipbodenbach.de  
 E-Mail: info@philipbodenbach.de
 
 ## Hosting über Netlify

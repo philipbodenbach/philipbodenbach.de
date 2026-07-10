@@ -1,19 +1,13 @@
 ---
 import PrivacyPolicy from "../content/legal/privacy.md";
 import SeoHead from "../components/SeoHead.astro";
+import { SITEMAP_INDEX_PATH, absoluteUrl, alternateLinksFor } from "../lib/seo";
 import "../styles/global.css";
 
-const canonicalUrl = "https://www.philipbodenbach.de/datenschutz/";
+const canonicalUrl = absoluteUrl("/datenschutz/");
 const pageTitle = "Datenschutz | Philip Bodenbach";
 const pageDescription = "Datenschutzerklärung für philipbodenbach.de.";
-const alternateLinks = [
-  { hreflang: "de", href: canonicalUrl },
-  {
-    hreflang: "en",
-    href: "https://www.philipbodenbach.de/en/privacy/",
-  },
-  { hreflang: "x-default", href: canonicalUrl },
-];
+const alternateLinks = alternateLinksFor("privacy");
 const themeInitScript = `
   (() => {
     const storageKey = 'pb-theme';
@@ -90,7 +84,7 @@ const footerLinks = [
   },
   { href: "/impressum/", label: "Impressum" },
   { href: "/datenschutz/", label: "Datenschutz" },
-  { href: "/sitemap.xml", label: "Sitemap" },
+  { href: SITEMAP_INDEX_PATH, label: "Sitemap" },
 ];
 ---
 
