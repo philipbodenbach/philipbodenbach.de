@@ -9,9 +9,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "seo:audit": "node scripts/seo-audit.mjs",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.3.2",
     "astro": "^7.0.6",
     "tailwindcss": "^4.3.2"

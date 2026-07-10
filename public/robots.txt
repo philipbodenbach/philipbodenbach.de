@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.philipbodenbach.de/sitemap.xml
+Sitemap: https://philipbodenbach.de/sitemap-index.xml

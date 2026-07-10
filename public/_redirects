@@ -1,0 +1,2 @@
+# Canonical host redirect. Keep this rule first to avoid host redirect chains.
+https://www.philipbodenbach.de/* https://philipbodenbach.de/:splat 301!

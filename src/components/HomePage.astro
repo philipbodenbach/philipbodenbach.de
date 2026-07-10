@@ -3,6 +3,7 @@ import "../styles/global.css";
 import ReferenceSection from "./ReferenceSection.astro";
 import SeoHead from "./SeoHead.astro";
 import type { HomeContent } from "../i18n/home";
+import { LOGO_IMAGE_URL, PERSON_ID, absoluteUrl } from "../lib/seo";
 
 interface Props {
   content: HomeContent;
@@ -12,7 +13,7 @@ const { content } = Astro.props;
 const pageTitle = content.seo.title;
 const pageDescription = content.seo.description;
 const canonicalUrl = content.canonicalUrl;
-const logoImageUrl = "https://www.philipbodenbach.de/pb_Logos_schwarz.png";
+const logoImageUrl = LOGO_IMAGE_URL;
 const themeInitScript = `
   (() => {
     const storageKey = 'pb-theme';
@@ -72,8 +73,10 @@ const themeToggleScript = `
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": PERSON_ID,
   name: "Philip Bodenbach",
-  url: canonicalUrl,
+  url: absoluteUrl("/"),
+  mainEntityOfPage: canonicalUrl,
   image: logoImageUrl,
   jobTitle: content.schema.jobTitle,
   email: "mailto:info@philipbodenbach.de",

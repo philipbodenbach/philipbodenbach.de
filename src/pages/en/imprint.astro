@@ -1,25 +1,17 @@
 ---
 import "../../styles/global.css";
 import SeoHead from "../../components/SeoHead.astro";
+import {
+  SITEMAP_INDEX_PATH,
+  absoluteUrl,
+  alternateLinksFor,
+} from "../../lib/seo";
 
-const canonicalUrl = "https://www.philipbodenbach.de/en/imprint/";
+const canonicalUrl = absoluteUrl("/en/imprint/");
 const pageTitle = "Imprint | Philip Bodenbach";
 const pageDescription =
   "Imprint for philipbodenbach.de, Philip Bodenbach, Eschweiler.";
-const alternateLinks = [
-  {
-    hreflang: "de",
-    href: "https://www.philipbodenbach.de/impressum/",
-  },
-  {
-    hreflang: "en",
-    href: canonicalUrl,
-  },
-  {
-    hreflang: "x-default",
-    href: "https://www.philipbodenbach.de/impressum/",
-  },
-];
+const alternateLinks = alternateLinksFor("imprint");
 const themeInitScript = `
   (() => {
     const storageKey = 'pb-theme';
@@ -96,7 +88,7 @@ const footerLinks = [
   },
   { href: "/en/imprint/", label: "Imprint" },
   { href: "/en/privacy/", label: "Privacy Policy" },
-  { href: "/sitemap.xml", label: "Sitemap" },
+  { href: SITEMAP_INDEX_PATH, label: "Sitemap" },
 ];
 ---
 
