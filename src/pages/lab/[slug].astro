@@ -1,0 +1,9 @@
+---
+import ExperimentPage from "../../components/ExperimentPage.astro";
+import { experiments } from "../../data/experiments";
+export function getStaticPaths() {
+  return experiments.map(experiment => ({ params: { slug: experiment.slug }, props: { experiment } }));
+}
+const { experiment } = Astro.props;
+---
+<ExperimentPage locale="de" experiment={experiment} />

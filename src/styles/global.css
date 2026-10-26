@@ -2,6 +2,37 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@layer components {
+  .section-label { @apply text-sm font-medium uppercase tracking-wide text-teal-800 dark:text-teal-300; }
+  .section-heading { @apply mt-3 text-3xl font-semibold leading-tight text-neutral-950 dark:text-white; }
+  .text-link { @apply inline-flex items-center gap-2 text-sm font-medium text-teal-800 underline-offset-4 hover:underline dark:text-teal-300; }
+  .secondary-link { @apply text-neutral-600 dark:text-neutral-300; }
+  .button-primary { @apply inline-flex items-center justify-center gap-3 rounded-md bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-teal-800 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-teal-200; }
+  .button-secondary { @apply inline-flex items-center justify-center rounded-md border border-neutral-300 px-5 py-3 text-sm font-medium transition hover:border-teal-700 hover:text-teal-800 dark:border-neutral-700 dark:hover:border-teal-300 dark:hover:text-teal-200; }
+  .tag { @apply rounded border border-neutral-200 px-2.5 py-1 text-xs text-neutral-600 dark:border-neutral-700 dark:text-neutral-300; }
+  .teaser-card { @apply overflow-hidden rounded-lg border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950; }
+  .teaser-image { @apply flex aspect-[16/7] items-center justify-center overflow-hidden bg-[#090d17] p-8; }
+  .teaser-image img { @apply h-auto max-h-full w-full object-contain; }
+  .teaser-artwork { @apply aspect-[4/3] bg-[#e9e2cf] p-0; }
+  .teaser-artwork img { @apply h-full w-full object-contain; }
+  .teaser-body { @apply p-6 sm:p-8; }
+  .teaser-horizontal { @apply md:grid md:grid-cols-[0.85fr_1.15fr]; }
+  .teaser-horizontal .teaser-body { @apply self-center lg:p-10; }
+  .lab-video { @apply mx-auto block h-auto w-full max-w-[420px] rounded-md bg-[#e9e2cf]; }
+}
+
+a:focus-visible, button:focus-visible, video:focus-visible, summary:focus-visible, [tabindex="0"]:focus-visible {
+  outline: 2px solid #0f766e;
+  outline-offset: 4px;
+}
+.dark a:focus-visible, .dark button:focus-visible, .dark video:focus-visible, .dark summary:focus-visible, .dark [tabindex="0"]:focus-visible { outline-color: #5eead4; }
+.skip-link { position: absolute; left: 1rem; top: -5rem; z-index: 100; background: #fff; color: #111; padding: .75rem 1rem; }
+.skip-link:focus { top: 1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+}
+
 html {
   color-scheme: light dark;
   scroll-behavior: smooth;

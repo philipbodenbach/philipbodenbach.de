@@ -1,0 +1,20 @@
+---
+import SiteLayout from "./SiteLayout.astro";
+import LabTeaser from "./LabTeaser.astro";
+import { experiments } from "../data/experiments";
+import { labContent } from "../i18n/lab";
+import type { Locale } from "../i18n/home";
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const content = labContent[locale];
+---
+<SiteLayout locale={locale} pageKey="lab" title={content.title} description={content.description}>
+  <section class="mx-auto max-w-6xl px-5 pb-12 pt-16 sm:px-6 sm:pt-20 lg:px-8">
+    <p class="section-label">Lab</p>
+    <h1 class="mt-5 max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">{content.heading}</h1>
+    <p class="mt-7 max-w-2xl text-lg leading-8 text-neutral-700 dark:text-neutral-300">{content.description}</p>
+  </section>
+  <section aria-label={content.allExperiments} class="mx-auto max-w-6xl space-y-8 px-5 pb-20 sm:px-6 lg:px-8">
+    {experiments.map(experiment => <LabTeaser locale={locale} experiment={experiment} />)}
+  </section>
+</SiteLayout>

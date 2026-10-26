@@ -1,0 +1,4 @@
+Tetris on graph paper, built with WerkWorker + Werk1112 and a local model. One HTML file with Canvas, film grain and Web Audio.
+
+Gameplay below. Play the original and read about the experiment:
+https://philipbodenbach.de/en/lab/werkworker-tetris/

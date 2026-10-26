@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "experiment": "werkworker-tetris",
+  "measurement_date": "2026-10-26",
+  "sources": {
+    "run": "Selected local WerkWorker SQLite session; allowlisted metrics only.",
+    "werk_top": "Manually transcribed from the supplied Werk top screenshot; rounded displayed values, not peak measurements."
+  },
+  "run": {
+    "session_id": "session_cffa9a4b-6f5b-4592-891f-19b9b12ce19b",
+    "run_id": "run_fdc8bd54-6382-44df-9027-d36997c9a3c7",
+    "status": "completed",
+    "started_at": "2026-10-26T13:37:31.891+01:00",
+    "completed_at": "2026-10-26T14:07:55.330+01:00",
+    "timezone": "Europe/Berlin",
+    "metrics": {
+      "steps": 52,
+      "model_requests": 54,
+      "tool_invocations": 45,
+      "first_text_ms": 133640,
+      "first_tool_ms": 13198,
+      "approval_wait_ms": 0,
+      "total_ms": 1823438,
+      "input_tokens": 540232,
+      "output_tokens": 17600,
+      "estimated_input_tokens": 11460
+    },
+    "tool_counts": {
+      "skills.load": 1,
+      "task.plan": 3,
+      "files.write": 1,
+      "files.edit": 6,
+      "files.read": 17,
+      "files.search": 7,
+      "process.run": 10
+    },
+    "tool_outcomes": {
+      "succeeded": 43,
+      "failed": 2
+    },
+    "tool_failures": [
+      {
+        "tool": "files.read",
+        "code": "validation_error"
+      },
+      {
+        "tool": "process.run",
+        "code": "path_denied"
+      }
+    ],
+    "attempt_error_counts": {
+      "model_feedback_echo": 2,
+      "model_output_limit": 1
+    },
+    "plan_steps": 2,
+    "child_sessions": 0,
+    "last_context_omitted_messages": 98,
+    "configuration": {
+      "profile": "coding-basic",
+      "model": "qwen3.8-27b-ud-q4_k_xl",
+      "continuous": true,
+      "context_tokens": 16384,
+      "reserve_output_tokens": 4096
+    }
+  },
+  "werk_top_snapshot": {
+    "observed_at": "2026-10-26T14:45:22+01:00",
+    "server_uptime_seconds": 4197,
+    "runtime": "llama.cpp",
+    "device_backend": "CUDA",
+    "inference_slots": 2,
+    "reasoning_default": "off",
+    "reasoning_tokens": 0,
+    "host_memory_used_including_cache_gib": 26.5,
+    "host_memory_capacity_gib": 98.3,
+    "host_available_gib": 75.8,
+    "swap_used_gib": 0,
+    "worker_rss_gib": 10.5,
+    "gpu_memory_used_gib": 23.9,
+    "gpu_memory_capacity_gib": 24.0,
+    "gpu_pressure": "EMERGENCY",
+    "gpu_layers_requested": 999,
+    "backend_context_used_tokens": 21870,
+    "backend_context_capacity_tokens": 65536,
+    "visible_requests": [
+      {
+        "id": 54,
+        "prompt_tokens": 10948,
+        "cached_tokens": 4177,
+        "output_tokens": 187,
+        "elapsed_seconds": 15.45,
+        "decode_tokens_per_second": 34.9,
+        "state": "done"
+      },
+      {
+        "id": 53,
+        "prompt_tokens": 10841,
+        "cached_tokens": 4177,
+        "output_tokens": 209,
+        "elapsed_seconds": 16.53,
+        "decode_tokens_per_second": 34.4,
+        "state": "tool_calls"
+      },
+      {
+        "id": 52,
+        "prompt_tokens": 11136,
+        "cached_tokens": 4177,
+        "output_tokens": 93,
+        "elapsed_seconds": 13.25,
+        "decode_tokens_per_second": 33.5,
+        "state": "tool_calls"
+      },
+      {
+        "id": 51,
+        "prompt_tokens": 11224,
+        "cached_tokens": 4177,
+        "output_tokens": 108,
+        "elapsed_seconds": 12.84,
+        "decode_tokens_per_second": 35.6,
+        "state": "tool_calls"
+      },
+      {
+        "id": 50,
+        "prompt_tokens": 10926,
+        "cached_tokens": 4177,
+        "output_tokens": 92,
+        "elapsed_seconds": 13.0,
+        "decode_tokens_per_second": 32.9,
+        "state": "tool_calls"
+      },
+      {
+        "id": 49,
+        "prompt_tokens": 11012,
+        "cached_tokens": 4177,
+        "output_tokens": 664,
+        "elapsed_seconds": 28.89,
+        "decode_tokens_per_second": 35.0,
+        "state": "tool_calls"
+      },
+      {
+        "id": 48,
+        "prompt_tokens": 11147,
+        "cached_tokens": 4177,
+        "output_tokens": 111,
+        "elapsed_seconds": 12.14,
+        "decode_tokens_per_second": 35.4,
+        "state": "done"
+      },
+      {
+        "id": 47,
+        "prompt_tokens": 10890,
+        "cached_tokens": 4177,
+        "output_tokens": 107,
+        "elapsed_seconds": 13.72,
+        "decode_tokens_per_second": 35.2,
+        "state": "tool_calls"
+      },
+      {
+        "id": 46,
+        "prompt_tokens": 11238,
+        "cached_tokens": 4177,
+        "output_tokens": 108,
+        "elapsed_seconds": 12.53,
+        "decode_tokens_per_second": 32.8,
+        "state": "tool_calls"
+      },
+      {
+        "id": 45,
+        "prompt_tokens": 11106,
+        "cached_tokens": 4177,
+        "output_tokens": 713,
+        "elapsed_seconds": 30.59,
+        "decode_tokens_per_second": 33.8,
+        "state": "tool_calls"
+      },
+      {
+        "id": 44,
+        "prompt_tokens": 11181,
+        "cached_tokens": 4177,
+        "output_tokens": 66,
+        "elapsed_seconds": 12.33,
+        "decode_tokens_per_second": 33.3,
+        "state": "tool_calls"
+      },
+      {
+        "id": 43,
+        "prompt_tokens": 11226,
+        "cached_tokens": 4177,
+        "output_tokens": 42,
+        "elapsed_seconds": 12.35,
+        "decode_tokens_per_second": 31.7,
+        "state": "tool_calls"
+      },
+      {
+        "id": 42,
+        "prompt_tokens": 10987,
+        "cached_tokens": 4177,
+        "output_tokens": 55,
+        "elapsed_seconds": 13.65,
+        "decode_tokens_per_second": 34.2,
+        "state": "tool_calls"
+      },
+      {
+        "id": 41,
+        "prompt_tokens": 11157,
+        "cached_tokens": 4177,
+        "output_tokens": 87,
+        "elapsed_seconds": 16.34,
+        "decode_tokens_per_second": 32.0,
+        "state": "tool_calls"
+      },
+      {
+        "id": 40,
+        "prompt_tokens": 11103,
+        "cached_tokens": 4177,
+        "output_tokens": 91,
+        "elapsed_seconds": 12.25,
+        "decode_tokens_per_second": 33.8,
+        "state": "tool_calls"
+      },
+      {
+        "id": 39,
+        "prompt_tokens": 11186,
+        "cached_tokens": 4177,
+        "output_tokens": 81,
+        "elapsed_seconds": 12.67,
+        "decode_tokens_per_second": 33.7,
+        "state": "tool_calls"
+      }
+    ]
+  },
+  "verification": {
+    "source": "Selected process.run results from the same local session; no full transcript exported.",
+    "process_outcomes": {
+      "exit_zero": 6,
+      "exit_nonzero": 3,
+      "not_started": 1
+    },
+    "final_syntax_check": "passed",
+    "behavioral_check_method": "Selected copied functions, not an automated browser test of the artifact.",
+    "final_behavioral_check_stderr": "Assertion failed: rotateCW",
+    "final_behavioral_check_exit_code": 0,
+    "limitation": "console.assert logged a failed assertion without a nonzero process exit. Successful tool execution and completed run status do not establish passing behavioral tests."
+  },
+  "artifact": {
+    "bytes": 20304,
+    "lines": 508,
+    "sha256": "65cfee244a50c5b0bad7d0ca6692e66d31e08f095477a5dce2f015260829e90b",
+    "unchanged": true
+  },
+  "evidence": [
+    {
+      "id": "worker",
+      "path": "/lab/tetris/werkworker-session.png",
+      "captured_at": "2026-10-26T14:44:56+01:00",
+      "width": 1857,
+      "height": 2008
+    },
+    {
+      "id": "top",
+      "path": "/lab/tetris/werk-top.png",
+      "captured_at": "2026-10-26T14:45:22+01:00",
+      "width": 1866,
+      "height": 932
+    }
+  ],
+  "system_snapshot": {
+    "observed_at": "2026-10-26T17:56:33+01:00",
+    "scope": "Local system read after the experiment. Hardware and installed versions are a later inventory, not a historical snapshot taken at run start.",
+    "sources": {
+      "cpu": "Windows Get-CimInstance Win32_Processor, cross-checked with lscpu",
+      "physical_memory": "Windows Get-CimInstance Win32_PhysicalMemory; sum of module capacities",
+      "gpu": "nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv",
+      "os": "Windows Get-CimInstance Win32_OperatingSystem, Linux /etc/os-release and uname -r",
+      "wsl_memory": "Linux MemTotal, cross-checked with free -b",
+      "software": "Installed werk and werk-worker --version; llama-server selected by Werk1112 llama-cuda path file --version; that build CMake CUDA compiler metadata",
+      "model": "Local manifest for the model identifier already recorded in the run; model filename and format only"
+    },
+    "cpu": {
+      "model": "Intel Xeon E5-2673 v3",
+      "sockets": 2,
+      "cores_per_socket": 12,
+      "physical_cores": 24,
+      "logical_processors": 48,
+      "nominal_frequency_ghz": 2.4,
+      "architecture": "x86_64"
+    },
+    "gpu": {
+      "model": "NVIDIA GeForce RTX 3090",
+      "count": 1,
+      "memory_total_mib": 24576,
+      "driver_version": "616.92"
+    },
+    "memory": {
+      "physical_bytes": 137438953472,
+      "module_count": 8,
+      "module_capacity_bytes": 17179869184,
+      "wsl_visible_bytes": 105568845824
+    },
+    "host_os": {
+      "name": "Microsoft Windows 11 Pro",
+      "version": "10.0.26200",
+      "build": "26200"
+    },
+    "guest_os": {
+      "name": "Ubuntu 22.04.5 LTS",
+      "environment": "WSL2",
+      "kernel": "6.18.54.1-microsoft-standard-WSL2"
+    },
+    "software": {
+      "werk1112": "1.9.1",
+      "werkworker": "0.1.0",
+      "llama_cpp": {
+        "version": "0.4.1-dev",
+        "build": 1,
+        "commit": "ec92815",
+        "compiler": "GNU 11.4.0",
+        "cuda_compiler_version": "13.0.48",
+        "cuda_architectures": [
+          "86"
+        ]
+      },
+      "model_filename": "Qwen3.8-27B-UD-Q4_K_XL.gguf",
+      "model_format": "GGUF"
+    }
+  }
+}

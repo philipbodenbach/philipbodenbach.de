@@ -1,0 +1,250 @@
+---
+import "../styles/global.css";
+import SeoHead from "./SeoHead.astro";
+import { homeContent, type Locale } from "../i18n/home";
+import { PAGE_PAIRS, absoluteUrl, alternateLinksFor } from "../lib/seo";
+
+interface Props {
+  locale: Locale;
+  pageKey?: keyof typeof PAGE_PAIRS;
+  title?: string;
+  description?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  schema?: Record<string, unknown>;
+}
+const { locale, pageKey = "home", title, description, imageUrl, imageAlt, schema } = Astro.props;
+const base = homeContent[locale];
+const pair = PAGE_PAIRS[pageKey];
+const otherLocale = locale === "de" ? "en" : "de";
+const content = {
+  ...base,
+  alternateLinks: alternateLinksFor(pageKey),
+  languageSwitch: { ...base.languageSwitch, href: pair[otherLocale].path },
+  navigation: base.navigation.map(item => ({
+    ...item,
+    href: item.href.startsWith("#") && pageKey !== "home" ? `${base.homeHref}${item.href}` : item.href,
+  })),
+};
+const pageTitle = title ?? base.seo.title;
+const pageDescription = description ?? base.seo.description;
+const canonicalUrl = absoluteUrl(pair[locale].path);
+const themeInitScript = `
+  (() => {
+    const storageKey = 'pb-theme';
+    const root = document.documentElement;
+
+    try {
+      const storedTheme = localStorage.getItem(storageKey);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = storedTheme === 'dark' || storedTheme === 'light'
+        ? storedTheme
+        : prefersDark
+          ? 'dark'
+          : 'light';
+
+      root.classList.toggle('dark', theme === 'dark');
+      root.style.colorScheme = theme;
+    } catch {
+      root.classList.remove('dark');
+      root.style.colorScheme = 'light';
+    }
+  })();
+`;
+const themeToggleLabels = JSON.stringify(content.themeToggle);
+const themeToggleScript = `
+  (() => {
+    const storageKey = 'pb-theme';
+    const labels = ${themeToggleLabels};
+    const root = document.documentElement;
+    const button = document.querySelector('[data-theme-toggle]');
+
+    if (!button) {
+      return;
+    }
+
+    const syncButton = () => {
+      const isDark = root.classList.contains('dark');
+      const label = isDark ? labels.activateLight : labels.activateDark;
+
+      button.setAttribute('aria-label', label);
+      button.setAttribute('aria-pressed', String(isDark));
+      button.setAttribute('title', label);
+    };
+
+    button.addEventListener('click', () => {
+      const nextTheme = root.classList.contains('dark') ? 'light' : 'dark';
+
+      root.classList.toggle('dark', nextTheme === 'dark');
+      root.style.colorScheme = nextTheme;
+      try { localStorage.setItem(storageKey, nextTheme); } catch {}
+      syncButton();
+    });
+
+    syncButton();
+  })();
+`;
+
+---
+
+
+<!doctype html>
+<html
+  lang={content.lang}
+  class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-100"
+>
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline set:html={themeInitScript} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <SeoHead
+      title={pageTitle}
+      description={pageDescription}
+      canonicalUrl={canonicalUrl}
+      alternateLinks={content.alternateLinks}
+      locale={content.ogLocale}
+      imageUrl={imageUrl}
+      imageAlt={imageAlt}
+    />
+
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  </head>
+  <body class="font-sans antialiased">
+    <a class="skip-link" href="#main">{locale === "de" ? "Zum Inhalt" : "Skip to content"}</a>
+    <header
+      class="border-b border-neutral-200 bg-white backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/90"
+    >
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-[clamp(34px,4vw,55px)] px-5 pb-[clamp(34px,5vw,55px)] pt-[clamp(34px,6vw,89px)] sm:px-6 lg:px-8"
+      >
+        <div class="flex items-center justify-between gap-6">
+          <a
+            href={content.homeHref}
+            aria-label={content.logoAriaLabel}
+            class="inline-flex shrink-0 items-center"
+          >
+            <img
+              src="/pb_Logos_bm_schwarz.png"
+              width="521"
+              height="200"
+              alt="Philip Bodenbach"
+              class="h-auto w-[clamp(144px,18vw,233px)] object-contain dark:hidden"
+            />
+            <img
+              src="/pb_Logos_bm_grau.png"
+              width="521"
+              height="200"
+              alt="Philip Bodenbach"
+              class="hidden h-auto w-[clamp(144px,18vw,233px)] object-contain dark:block"
+            />
+          </a>
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              data-theme-toggle
+              aria-label={content.themeToggle.activateDark}
+              aria-pressed="false"
+              title={content.themeToggle.activateDark}
+              class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-300 text-sm font-medium text-neutral-700 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+            >
+              <svg
+                class="h-5 w-5 dark:hidden"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 4V2M12 22v-2M4 12H2M22 12h-2M5.64 5.64 4.22 4.22M19.78 19.78l-1.42-1.42M18.36 5.64l1.42-1.42M4.22 19.78l1.42-1.42"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"></path>
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4.2"
+                  stroke="currentColor"
+                  stroke-width="1.8"></circle>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 dark:block"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M20 14.4A7.8 7.8 0 0 1 9.6 4 8 8 0 1 0 20 14.4Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <a
+              href={content.languageSwitch.href}
+              hreflang={content.languageSwitch.hreflang}
+              lang={content.languageSwitch.hreflang}
+              aria-label={content.languageSwitch.ariaLabel}
+              class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-300 text-sm font-medium text-neutral-700 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+            >
+              {content.languageSwitch.label}
+            </a>
+            <a
+              href="mailto:info@philipbodenbach.de"
+              class="hidden rounded-md border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950 sm:inline-flex"
+            >
+              {content.headerContactLabel}
+            </a>
+          </div>
+        </div>
+        <nav
+          aria-label={content.navigationLabel}
+          class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-neutral-600 dark:text-neutral-300"
+        >
+          {
+            content.navigation.map((item) => (
+              <a
+                href={item.href}
+                class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="border-t border-neutral-200 dark:border-neutral-800">
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 text-sm text-neutral-600 dark:text-neutral-400 sm:px-6 lg:px-8"
+      >
+        <nav
+          aria-label={content.footer.ariaLabel}
+          class="flex flex-wrap gap-x-5 gap-y-2"
+        >
+          {
+            content.footer.links.map((link) => (
+              <a
+                href={link.href}
+                class="transition hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2 focus:ring-offset-neutral-50 dark:hover:text-teal-200 dark:focus:ring-teal-300 dark:focus:ring-offset-neutral-950"
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </nav>
+        <p>
+          © {new Date().getFullYear()} Philip Bodenbach. {
+            content.footer.copyrightRole
+          }
+        </p>
+      </div>
+    </footer>
+    <script is:inline set:html={themeToggleScript} />
+  </body>
+</html>
