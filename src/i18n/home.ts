@@ -53,6 +53,7 @@ export const homeContent = {
       { href: "#leistungen", label: "Leistungen" },
       { href: "#technologien", label: "Technologien" },
       { href: "#projekte", label: "Projekte" },
+      { href: "/lab/", label: "Lab" },
       { href: "#kontakt", label: "Kontakt" },
     ],
     hero: {
@@ -108,8 +109,8 @@ export const homeContent = {
       items: technologies,
     },
     projects: {
-      label: "Projekte / Open Source",
-      heading: "Werk1112",
+      label: "Projekte",
+      heading: "Werkzeuge für lokale KI.",
       description:
         "Werk1112 ist ein local-first Inference Router für moderne KI-Modelle, geschrieben in Rust. Das Projekt stellt eine stabile CLI und eine OpenAI-kompatible HTTP API bereit und richtet sich an lokale Workflows mit modernen Modell-Runtimes.",
       githubLabel: "Werk1112 auf GitHub",
@@ -157,6 +158,8 @@ export const homeContent = {
           href: "https://philipbodenbach.github.io/werk1112/",
           label: "Werk1112 Projektseite",
         },
+        { href: "https://philipbodenbach.github.io/werkWorker/de/", label: "werkWorker Projektseite" },
+        { href: "/lab/", label: "Lab" },
         { href: "/impressum/", label: "Impressum" },
         { href: "/datenschutz/", label: "Datenschutz" },
         { href: SITEMAP_INDEX_PATH, label: "Sitemap" },
@@ -211,6 +214,7 @@ export const homeContent = {
       { href: "#leistungen", label: "Services" },
       { href: "#technologien", label: "Technologies" },
       { href: "#projekte", label: "Projects" },
+      { href: "/en/lab/", label: "Lab" },
       { href: "#kontakt", label: "Contact" },
     ],
     hero: {
@@ -270,8 +274,8 @@ export const homeContent = {
       items: technologies,
     },
     projects: {
-      label: "Projects / Open Source",
-      heading: "Werk1112",
+      label: "Projects",
+      heading: "Tools for local AI.",
       description:
         "A local-first inference router for modern AI models written in Rust.",
       githubLabel: "Werk1112 on GitHub",
@@ -319,6 +323,8 @@ export const homeContent = {
           href: "https://philipbodenbach.github.io/werk1112/",
           label: "Werk1112 project page",
         },
+        { href: "https://philipbodenbach.github.io/werkWorker/", label: "werkWorker project page" },
+        { href: "/en/lab/", label: "Lab" },
         { href: "/en/imprint/", label: "Imprint" },
         { href: "/en/privacy/", label: "Privacy Policy" },
         { href: SITEMAP_INDEX_PATH, label: "Sitemap" },

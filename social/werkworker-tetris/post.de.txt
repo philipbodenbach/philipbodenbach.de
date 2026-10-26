@@ -1,0 +1,4 @@
+Tetris auf kariertem Papier, gebaut mit werkWorker + Werk1112 und einem lokalen Modell. Eine HTML-Datei mit Canvas, Filmkorn und Web Audio.
+
+Gameplay im Video. Das Original zum Spielen und der Versuchsbericht:
+https://philipbodenbach.de/lab/werkworker-tetris/

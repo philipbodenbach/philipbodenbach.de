@@ -1,0 +1,23 @@
+---
+import TeaserCard from "./TeaserCard.astro";
+import { experiments, experimentPath, type Experiment } from "../data/experiments";
+import { labContent } from "../i18n/lab";
+import type { Locale } from "../i18n/home";
+interface Props { locale: Locale; experiment?: Experiment; }
+const { locale, experiment = experiments[0] } = Astro.props;
+const copy = experiment.copy[locale];
+const lab = labContent[locale];
+---
+<TeaserCard
+  eyebrow={`${lab.experiment} · ${new Intl.DateTimeFormat(locale, { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(experiment.date))}`}
+  title={copy.title}
+  description={copy.description}
+  image={experiment.image}
+  imageAlt={copy.imageAlt}
+  href={experimentPath(experiment, locale)}
+  linkLabel={lab.read}
+  secondaryLink={{ href: experiment.demoUrl, label: lab.play }}
+  tags={experiment.tags}
+  horizontal
+  artwork
+/>
