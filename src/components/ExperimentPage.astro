@@ -1,5 +1,6 @@
 ---
 import SiteLayout from "./SiteLayout.astro";
+import ExperimentTechnical from "./ExperimentTechnical.astro";
 import { labContent } from "../i18n/lab";
 import type { Locale } from "../i18n/home";
 import { experimentPath, type Experiment } from "../data/experiments";
@@ -8,6 +9,7 @@ interface Props { locale: Locale; experiment: Experiment; }
 const { locale, experiment } = Astro.props;
 const ui = labContent[locale];
 const copy = experiment.copy[locale];
+const technical = experiment.technical?.[locale];
 const schema = {
   "@context": "https://schema.org", "@type": "Article",
   headline: copy.title, description: copy.description,
@@ -27,6 +29,7 @@ const schema = {
       <div class="mt-8 flex flex-wrap gap-3">
         <a href={experiment.demoUrl} class="button-primary">{ui.play} <span aria-hidden="true">↗</span></a>
         <a href={experiment.sourceUrl} class="button-secondary">{ui.source}</a>
+        {technical && <a href="#technical" class="button-secondary">{technical.label} <span aria-hidden="true">↓</span></a>}
       </div>
     </header>
     <section class="border-y border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
@@ -49,7 +52,8 @@ const schema = {
       </div>
     </section>
     <div class="mx-auto max-w-6xl px-5 py-14 sm:px-6 lg:px-8">
-      <div class="max-w-3xl space-y-10">
+      {technical && <ExperimentTechnical report={technical} />}
+      <div class:list={["max-w-3xl space-y-10", { "mt-14": technical }]}>
         {copy.sections.map(section => <section><h2 class="text-2xl font-semibold">{section.title}</h2><p class="mt-4 text-lg leading-8 text-neutral-700 dark:text-neutral-300">{section.text}</p></section>)}
       </div>
       <section class="mt-14 border-t border-neutral-200 pt-10 dark:border-neutral-800">
@@ -59,7 +63,7 @@ const schema = {
       </section>
       <nav aria-label={ui.related} class="mt-12 flex flex-wrap gap-6 border-t border-neutral-200 pt-8 dark:border-neutral-800">
         <span class="text-neutral-500 dark:text-neutral-400">{ui.related}</span>
-        <a class="text-link" href={`https://philipbodenbach.github.io/werkWorker/${locale === "de" ? "de/" : ""}`}>werkWorker ↗</a>
+        <a class="text-link" href={`https://philipbodenbach.github.io/werkWorker/${locale === "de" ? "de/" : ""}`}>WerkWorker ↗</a>
         <a class="text-link" href="https://philipbodenbach.github.io/werk1112/">Werk1112 ↗</a>
       </nav>
     </div>

@@ -22,6 +22,9 @@ Stop the development server with `npm run astro -- dev stop`.
 - Teaser components: `TeaserCard.astro` and `LabTeaser.astro`.
 - Lab overview: `/lab/` and `/en/lab/`.
 - First experiment: `/lab/werkworker-tetris/` and `/en/lab/werkworker-tetris/`.
+- Optional technical reports: `ExperimentTechnical.astro` renders the localized
+  `technical` field on an experiment (summary metrics, method, measurements,
+  check limitations, request details, original evidence and data download).
 
 To add an experiment, add its metadata and both translations to the experiments
 array, its DE/EN route pair to `PAGE_PAIRS` in `site.config.mjs`, and its public
@@ -45,3 +48,14 @@ reviewed locally before publication; no Git publication is part of preparation.
 The video is only loaded when requested and never autoplays. `social/werkworker-tetris/`
 contains the higher-resolution X upload, DE/EN text drafts and preparation notes.
 The `social/` directory is not copied into the public Astro build.
+
+## Tetris measurements
+
+`src/data/measurements/werkworker-tetris.json` is the shared numerical source for
+the DE/EN report in `src/data/tetris-technical.ts` and the static download at
+`/lab/werkworker-tetris/metrics.json`. The report does not query a session database
+at build time. The two original terminal screenshots are in `public/lab/tetris/`.
+
+See `src/data/measurements/README.md` for provenance and counter definitions.
+Preserve the distinction between agent steps, model requests, tool calls, process
+exit codes, and completed plan steps when adding experiments.
