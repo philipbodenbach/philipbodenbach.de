@@ -5,7 +5,7 @@ import type { TechnicalReport } from "./technical";
 // Both translations and the downloadable JSON use the same measured numbers.
 export function tetrisTechnical(locale: Locale): TechnicalReport {
   const de = locale === "de";
-  const { run, werk_top_snapshot: top, verification, artifact } = measurements;
+  const { run, werk_top_snapshot: top, verification, artifact, system_snapshot: system } = measurements;
   const m = run.metrics;
   const n = (value: number, digits = 0) => new Intl.NumberFormat(locale, {
     minimumFractionDigits: digits, maximumFractionDigits: digits,
@@ -24,6 +24,10 @@ export function tetrisTechnical(locale: Locale): TechnicalReport {
   const toolRows = Object.entries(run.tool_counts).sort((a, b) => b[1] - a[1]).map(([label, count]) => ({ label, value: n(count) }));
   const interrupted = Object.values(run.attempt_error_counts).reduce((a, b) => a + b, 0);
   const status = `${run.tool_outcomes.succeeded} succeeded · ${run.tool_outcomes.failed} failed`;
+  const collected = new Intl.DateTimeFormat(locale, {
+    dateStyle: "long", timeStyle: "short", timeZone: run.timezone,
+  }).format(new Date(system.observed_at));
+  const gib = (bytes: number, digits = 0) => `${n(bytes / 2 ** 30, digits)} GiB`;
 
   return {
     label: de ? "Technische Dokumentation" : "Technical documentation",
@@ -31,6 +35,54 @@ export function tetrisTechnical(locale: Locale): TechnicalReport {
     intro: de
       ? `Der Lauf vom ${date} ist über die lokale WerkWorker-Sitzung und die beiden Terminal-Aufnahmen dokumentiert. Die Sitzungsdaten liefern die Gesamtwerte; Werk top ergänzt eine spätere Momentaufnahme der Inferenz.`
       : `The run on ${date} is documented by the local WerkWorker session and both terminal screenshots. The session provides the totals; Werk top adds a later snapshot of inference activity.`,
+    system: {
+      label: de ? "System-Spezifikationen" : "System specifications",
+      title: de ? "Der Rechner hinter dem Versuch." : "The machine behind the experiment.",
+      specs: [
+        {
+          label: "GPU", value: system.gpu.model,
+          detail: `${n(system.gpu.memory_total_mib / 1024)} GiB VRAM · ${top.device_backend}`,
+        },
+        {
+          label: "CPU", value: `${system.cpu.sockets} × ${system.cpu.model}`,
+          detail: de
+            ? `${system.cpu.physical_cores} Kerne / ${system.cpu.logical_processors} Threads gesamt · ${n(system.cpu.nominal_frequency_ghz, 1)} GHz Basistakt`
+            : `${system.cpu.physical_cores} cores / ${system.cpu.logical_processors} threads total · ${n(system.cpu.nominal_frequency_ghz, 1)} GHz base clock`,
+        },
+        {
+          label: de ? "Arbeitsspeicher" : "Memory", value: `${gib(system.memory.physical_bytes)} RAM`,
+          detail: de
+            ? `${system.memory.module_count} × ${gib(system.memory.module_capacity_bytes)} physisch · ${gib(system.memory.wsl_visible_bytes, 1)} in WSL sichtbar`
+            : `${system.memory.module_count} × ${gib(system.memory.module_capacity_bytes)} installed · ${gib(system.memory.wsl_visible_bytes, 1)} visible to WSL`,
+        },
+        {
+          label: de ? "Umgebung" : "Environment", value: system.guest_os.environment,
+          detail: `${system.guest_os.name} · ${system.host_os.name}`,
+        },
+      ],
+      provenance: de
+        ? `Systemdaten nach dem Versuch lokal ausgelesen: ${collected} (Europe/Berlin). Physischer RAM und der für WSL sichtbare Speicher sind getrennt angegeben.`
+        : `System inventory collected locally after the experiment: ${collected} (Europe/Berlin). Installed RAM and memory visible to WSL are listed separately.`,
+      detailsTitle: de ? "Softwareversionen und Systemdetails" : "Software versions and system details",
+      rows: [
+        { label: de ? "CPU-Architektur" : "CPU architecture", value: system.cpu.architecture },
+        { label: de ? "Windows-Host" : "Windows host", value: `${system.host_os.name} · ${system.host_os.version} · Build ${system.host_os.build}` },
+        { label: de ? "Linux-Distribution" : "Linux distribution", value: system.guest_os.name },
+        { label: de ? "WSL-Kernel" : "WSL kernel", value: system.guest_os.kernel },
+        { label: de ? "NVIDIA-Treiber" : "NVIDIA driver", value: system.gpu.driver_version },
+        { label: "Werk1112", value: system.software.werk1112 },
+        { label: "WerkWorker", value: system.software.werkworker },
+        { label: "llama.cpp", value: `${system.software.llama_cpp.version} · Build ${system.software.llama_cpp.build} · Commit ${system.software.llama_cpp.commit}` },
+        { label: de ? "C++-Compiler des llama.cpp-Builds" : "llama.cpp build C++ compiler", value: system.software.llama_cpp.compiler },
+        { label: de ? "CUDA-Compiler des llama.cpp-Builds" : "llama.cpp build CUDA compiler", value: system.software.llama_cpp.cuda_compiler_version },
+        { label: de ? "CUDA-Buildarchitektur" : "CUDA build architecture", value: system.software.llama_cpp.cuda_architectures.map(arch => `sm_${arch}`).join(", ") },
+        { label: de ? "Modelldatei" : "Model file", value: system.software.model_filename },
+        { label: de ? "Modellformat" : "Model format", value: system.software.model_format },
+      ],
+      note: de
+        ? "Quellen: Windows-CIM, lscpu, nvidia-smi, Linux-Systemdateien, installierte Programmversionen und Metadaten des ausgewählten llama.cpp-Builds. Dies ist eine nachträgliche Bestandsaufnahme; die Softwarestände wurden nicht zu Beginn des Laufs eingefroren. Die Speicherwerte aus Werk top weiter unten zeigen dagegen die ursprüngliche Aufnahme. Die CUDA-Compiler-Version bezeichnet den Build und ist keine Angabe zur maximalen CUDA-Unterstützung des Treibers."
+        : "Sources: Windows CIM, lscpu, nvidia-smi, Linux system files, installed program versions and metadata from the selected llama.cpp build. This is a later inventory; software versions were not frozen at run start. The Werk top memory values below come from the original screenshot. The CUDA compiler version describes the build, not the driver’s maximum supported CUDA version.",
+    },
     summary: [
       { label: de ? "Gesamtlaufzeit" : "Total run time", value: duration, note: de ? "Vom Start bis zum Abschluss des Agent-Laufs" : "From agent run start to completion" },
       { label: de ? "Agent-Schritte" : "Agent steps", value: n(m.steps), note: de ? `${run.plan_steps} übergeordnete Schritte im Aufgabenplan` : `${run.plan_steps} high-level steps in the task plan` },
@@ -97,14 +149,14 @@ export function tetrisTechnical(locale: Locale): TechnicalReport {
       {
         title: de ? "Speicher · Werk top" : "Memory · Werk top",
         rows: [
-          { label: de ? "Host inklusive Cache" : "Host including cache", value: pair(top.host_memory_used_including_cache_gib, top.host_memory_capacity_gib) },
-          { label: de ? "Host verfügbar" : "Host available", value: `${n(top.host_available_gib, 1)} GiB` },
+          { label: de ? "WSL-RAM inklusive Cache" : "WSL memory including cache", value: pair(top.host_memory_used_including_cache_gib, top.host_memory_capacity_gib) },
+          { label: de ? "In WSL verfügbar" : "Available in WSL", value: `${n(top.host_available_gib, 1)} GiB` },
           { label: "Worker RSS", value: `${n(top.worker_rss_gib, 1)} GiB` },
           { label: "Swap", value: `${n(top.swap_used_gib, 1)} GiB` },
           { label: de ? "GPU-Speicher" : "GPU memory", value: pair(top.gpu_memory_used_gib, top.gpu_memory_capacity_gib) },
           { label: "GPU pressure", value: top.gpu_pressure },
         ],
-        note: de ? `Momentaufnahme um ${time(top.observed_at)} Uhr, nach Abschluss des Laufs. Die Werte sind keine Spitzenwerte oder Messreihe. „EMERGENCY“ ist der angezeigte Speicherdruck; daraus folgt kein belegter Speicherabsturz. Das genaue GPU-Modell ist hier nicht erfasst.` : `Snapshot at ${time(top.observed_at)} Europe/Berlin, after the run completed. These are not peaks or a time series. “EMERGENCY” is the displayed memory pressure, not evidence of an out-of-memory crash. The exact GPU model is not recorded here.`,
+        note: de ? `Momentaufnahme um ${time(top.observed_at)} Uhr, nach Abschluss des Laufs. Die Werte sind keine Spitzenwerte oder Messreihe. „EMERGENCY“ ist der angezeigte Speicherdruck; daraus folgt kein belegter Speicherabsturz.` : `Snapshot at ${time(top.observed_at)} Europe/Berlin, after the run completed. These are not peaks or a time series. “EMERGENCY” is the displayed memory pressure, not evidence of an out-of-memory crash.`,
       },
       {
         title: de ? "Inferenz · Werk top" : "Inference · Werk top",
@@ -157,7 +209,7 @@ export function tetrisTechnical(locale: Locale): TechnicalReport {
     download: {
       label: de ? "Messdaten als JSON herunterladen" : "Download measurements as JSON",
       href: "/lab/werkworker-tetris/metrics.json",
-      note: de ? "Ausgewählte Sitzungsmetriken, Prüf-Ergebnisse, übertragene Screenshot-Werte und Prüfsumme. Ohne vollständigen Chatverlauf. Prompt und Referenzbild stehen oben im Versuchsbericht. Dieser Einzelversuch ist kein Modellvergleich oder Benchmark." : "Selected session metrics, check outcomes, transcribed screenshot values and checksum. Excludes the full conversation. The prompt and reference image are documented above in this report. This individual experiment is not a model comparison or benchmark.",
+      note: de ? "Ausgewählte Sitzungsmetriken, nachträglich erfasste Systemdaten, Prüf-Ergebnisse, übertragene Screenshot-Werte und Prüfsumme. Ohne vollständigen Chatverlauf. Prompt und Referenzbild stehen oben im Versuchsbericht. Dieser Einzelversuch ist kein Modellvergleich oder Benchmark." : "Selected session metrics, subsequently collected system specifications, check outcomes, transcribed screenshot values and checksum. Excludes the full conversation. The prompt and reference image are documented above in this report. This individual experiment is not a model comparison or benchmark.",
     },
   };
 }

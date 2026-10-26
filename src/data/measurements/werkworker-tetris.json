@@ -263,5 +263,65 @@
       "width": 1866,
       "height": 932
     }
-  ]
+  ],
+  "system_snapshot": {
+    "observed_at": "2026-10-26T17:56:33+01:00",
+    "scope": "Local system read after the experiment. Hardware and installed versions are a later inventory, not a historical snapshot taken at run start.",
+    "sources": {
+      "cpu": "Windows Get-CimInstance Win32_Processor, cross-checked with lscpu",
+      "physical_memory": "Windows Get-CimInstance Win32_PhysicalMemory; sum of module capacities",
+      "gpu": "nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv",
+      "os": "Windows Get-CimInstance Win32_OperatingSystem, Linux /etc/os-release and uname -r",
+      "wsl_memory": "Linux MemTotal, cross-checked with free -b",
+      "software": "Installed werk and werk-worker --version; llama-server selected by Werk1112 llama-cuda path file --version; that build CMake CUDA compiler metadata",
+      "model": "Local manifest for the model identifier already recorded in the run; model filename and format only"
+    },
+    "cpu": {
+      "model": "Intel Xeon E5-2673 v3",
+      "sockets": 2,
+      "cores_per_socket": 12,
+      "physical_cores": 24,
+      "logical_processors": 48,
+      "nominal_frequency_ghz": 2.4,
+      "architecture": "x86_64"
+    },
+    "gpu": {
+      "model": "NVIDIA GeForce RTX 3090",
+      "count": 1,
+      "memory_total_mib": 24576,
+      "driver_version": "616.92"
+    },
+    "memory": {
+      "physical_bytes": 137438953472,
+      "module_count": 8,
+      "module_capacity_bytes": 17179869184,
+      "wsl_visible_bytes": 105568845824
+    },
+    "host_os": {
+      "name": "Microsoft Windows 11 Pro",
+      "version": "10.0.26200",
+      "build": "26200"
+    },
+    "guest_os": {
+      "name": "Ubuntu 22.04.5 LTS",
+      "environment": "WSL2",
+      "kernel": "6.18.54.1-microsoft-standard-WSL2"
+    },
+    "software": {
+      "werk1112": "1.9.1",
+      "werkworker": "0.1.0",
+      "llama_cpp": {
+        "version": "0.4.1-dev",
+        "build": 1,
+        "commit": "ec92815",
+        "compiler": "GNU 11.4.0",
+        "cuda_compiler_version": "13.0.48",
+        "cuda_architectures": [
+          "86"
+        ]
+      },
+      "model_filename": "Qwen3.8-27B-UD-Q4_K_XL.gguf",
+      "model_format": "GGUF"
+    }
+  }
 }

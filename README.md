@@ -28,6 +28,9 @@ Stop the development server with `npm run astro -- dev stop`.
 - Optional technical reports: `ExperimentTechnical.astro` renders the localized
   `technical` field on an experiment (summary metrics, method, measurements,
   check limitations, request details, original evidence and data download).
+- `ExperimentSystem.astro` displays an optional `technical.system` profile in
+  the article header, before the prompt and result. Put GPU, CPU, physical RAM
+  and execution environment here; keep later inventory dates explicit.
 
 To add an experiment, add its metadata and both translations to the experiments
 array, its DE/EN route pair to `PAGE_PAIRS` in `site.config.mjs`, and its public
@@ -67,3 +70,8 @@ at build time. The two original terminal screenshots are in `public/lab/tetris/`
 See `src/data/measurements/README.md` for provenance and counter definitions.
 Preserve the distinction between agent steps, model requests, tool calls, process
 exit codes, and completed plan steps when adding experiments.
+
+The JSON's `system_snapshot` records the hardware and installed software read
+after the experiment. It drives both the DE/EN system cards and version details,
+and is included in the same static download. Physical host RAM and memory visible
+to WSL are different measurements; the original Werk top snapshot is retained.

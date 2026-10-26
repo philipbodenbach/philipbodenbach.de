@@ -1,7 +1,18 @@
+export interface SystemProfile {
+  label: string;
+  title: string;
+  specs: { label: string; value: string; detail: string }[];
+  provenance: string;
+  detailsTitle: string;
+  rows: { label: string; value: string }[];
+  note: string;
+}
+
 export interface TechnicalReport {
   label: string;
   title: string;
   intro: string;
+  system?: SystemProfile;
   summary: { label: string; value: string; note: string }[];
   method: { title: string; steps: { title: string; text: string }[] };
   groups: {

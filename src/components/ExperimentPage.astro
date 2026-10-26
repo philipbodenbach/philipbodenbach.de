@@ -2,6 +2,7 @@
 import SiteLayout from "./SiteLayout.astro";
 import ExperimentBrief from "./ExperimentBrief.astro";
 import ExperimentTechnical from "./ExperimentTechnical.astro";
+import ExperimentSystem from "./ExperimentSystem.astro";
 import { labContent } from "../i18n/lab";
 import type { Locale } from "../i18n/home";
 import { experimentPath, type Experiment } from "../data/experiments";
@@ -32,6 +33,7 @@ const schema = {
         <a href={experiment.sourceUrl} class="button-secondary">{ui.source}</a>
         {technical && <a href="#technical" class="button-secondary">{technical.label} <span aria-hidden="true">↓</span></a>}
       </div>
+      {technical?.system && <ExperimentSystem system={technical.system} />}
     </header>
     {experiment.brief && <ExperimentBrief brief={experiment.brief} locale={locale} />}
     <section class="border-y border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
