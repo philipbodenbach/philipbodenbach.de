@@ -2,9 +2,11 @@
 
 `werkworker-tetris.json` contains an explicit selection of measurements from the
 local WerkWorker session identified in `run.session_id` and `run.run_id`. Only
-that session was used; no raw conversation, original prompt, environment values
-or full database is published. Both translations and the JSON endpoint import
-this file. Future measurements should use the same explicit selection approach.
+that session was used. This JSON contains no raw conversation, original prompt,
+environment values or full database. Both translations and the JSON endpoint
+import this file. The user-supplied prompt and reference image are documented
+separately in the article's `brief` section. Future measurements should use the
+same explicit selection approach.
 
 ## Session counters
 

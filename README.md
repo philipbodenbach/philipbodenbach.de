@@ -22,6 +22,9 @@ Stop the development server with `npm run astro -- dev stop`.
 - Teaser components: `TeaserCard.astro` and `LabTeaser.astro`.
 - Lab overview: `/lab/` and `/en/lab/`.
 - First experiment: `/lab/werkworker-tetris/` and `/en/lab/werkworker-tetris/`.
+- Optional experiment briefs: `ExperimentBrief.astro` renders the `brief` field
+  with the verbatim prompt, its language, reference image and source links.
+  Surrounding text is translated; the original prompt is preserved in DE/EN.
 - Optional technical reports: `ExperimentTechnical.astro` renders the localized
   `technical` field on an experiment (summary metrics, method, measurements,
   check limitations, request details, original evidence and data download).
@@ -45,6 +48,11 @@ reviewed locally before publication; no Git publication is part of preparation.
 ## Tetris media and X
 
 `public/lab/tetris/` contains the 720×916 web video, poster and share image.
+`reference.jpg` is the unchanged 677×680 JPEG supplied with the original Tetris
+task, recovered from that session's single image attachment. The article includes
+the user-supplied prompt verbatim and credits Mia AI's original experiment and
+the accompanying X post. Prompt, image metadata and links live in the experiment's
+`brief` field in `src/data/experiments.ts`.
 The video is only loaded when requested and never autoplays. `social/werkworker-tetris/`
 contains the higher-resolution X upload, DE/EN text drafts and preparation notes.
 The `social/` directory is not copied into the public Astro build.

@@ -1,5 +1,6 @@
 ---
 import SiteLayout from "./SiteLayout.astro";
+import ExperimentBrief from "./ExperimentBrief.astro";
 import ExperimentTechnical from "./ExperimentTechnical.astro";
 import { labContent } from "../i18n/lab";
 import type { Locale } from "../i18n/home";
@@ -32,6 +33,7 @@ const schema = {
         {technical && <a href="#technical" class="button-secondary">{technical.label} <span aria-hidden="true">↓</span></a>}
       </div>
     </header>
+    {experiment.brief && <ExperimentBrief brief={experiment.brief} locale={locale} />}
     <section class="border-y border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
       <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-6 md:grid-cols-[1fr_1fr] lg:gap-16 lg:px-8">
         <figure>

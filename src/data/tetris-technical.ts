@@ -40,12 +40,12 @@ export function tetrisTechnical(locale: Locale): TechnicalReport {
     method: {
       title: de ? "Aufbau und Ablauf" : "Setup and workflow",
       steps: de ? [
-        { title: "Aufgabe und Referenz", text: "Ein einzelnes HTML-Spiel im Skizzenbuch-Stil mit kariertem Papier, Filmkorn und Sound. Die Sitzung enthält ein Referenzbild mit 677 × 680 Pixeln. Der vollständige ursprüngliche Prompt wird hier nicht veröffentlicht." },
+        { title: "Aufgabe und Referenz", text: "Ein einzelnes HTML-Spiel im Skizzenbuch-Stil mit kariertem Papier, Filmkorn und Sound. Die Sitzung enthält ein Referenzbild mit 677 × 680 Pixeln. Prompt und Referenzbild sind oben im Versuchsbericht dokumentiert." },
         { title: "Lokaler Agent und Inferenz", text: `WerkWorker v0.1.0 arbeitet mit dem Profil ${run.configuration.profile} im Continuous-Modus. Werk1112 stellt ${run.configuration.model} über ${top.runtime} und ${top.device_backend} bereit. WerkWorker meldet ${top.inference_slots} Inferenz-Slots und ${run.child_sessions} Subagenten; Reasoning steht auf „Server default: Off“.` },
         { title: "Implementieren und nacharbeiten", text: `Der Aufgabenplan umfasst ${run.plan_steps} Schritte: Spiel bauen und prüfen. In ${m.steps} Agent-Schritten werden Dateien geschrieben, gelesen und bearbeitet sowie Prozesse ausgeführt. Die ${m.model_requests} Modellanfragen und ${m.tool_invocations} Tool-Aufrufe sind eigene Zähler und entsprechen nicht der Anzahl der Planschritte.` },
         { title: "Das technische Ergebnis", text: "Eine eigenständige HTML-Datei enthält CSS und JavaScript. Canvas 2D zeichnet ein 10 × 20-Feld mit 36-Pixel-Zellen; CSS erzeugt das Papier, ein weiterer Canvas das Filmkorn. Web Audio synthetisiert Soundeffekte und Musik. Das Spiel lädt keine externen Bibliotheken und benötigt keinen Server für die Spiellogik." },
       ] : [
-        { title: "Task and reference", text: "A single-file HTML game with a sketchbook look, graph paper, film grain and sound. The session contains one reference image at 677 × 680 pixels. The full original prompt is not published here." },
+        { title: "Task and reference", text: "A single-file HTML game with a sketchbook look, graph paper, film grain and sound. The session contains one reference image at 677 × 680 pixels. The prompt and reference image are documented above in this report." },
         { title: "Local agent and inference", text: `WerkWorker v0.1.0 uses the ${run.configuration.profile} profile in continuous mode. Werk1112 serves ${run.configuration.model} through ${top.runtime} and ${top.device_backend}. WerkWorker reports ${top.inference_slots} inference slots and ${run.child_sessions} subagents; reasoning is set to “Server default: Off”.` },
         { title: "Implementation and iteration", text: `The task plan has ${run.plan_steps} steps: build the game and verify it. Across ${m.steps} agent steps, files are written, read and edited, and processes are run. The ${m.model_requests} model requests and ${m.tool_invocations} tool calls are separate counters, distinct from plan steps.` },
         { title: "The technical output", text: "One self-contained HTML file holds CSS and JavaScript. Canvas 2D draws a 10 × 20 board with 36-pixel cells; CSS creates the paper and a separate canvas renders film grain. Web Audio synthesises effects and music. The game loads no external libraries and needs no server for its game logic." },
@@ -157,7 +157,7 @@ export function tetrisTechnical(locale: Locale): TechnicalReport {
     download: {
       label: de ? "Messdaten als JSON herunterladen" : "Download measurements as JSON",
       href: "/lab/werkworker-tetris/metrics.json",
-      note: de ? "Ausgewählte Sitzungsmetriken, Prüf-Ergebnisse, übertragene Screenshot-Werte und Prüfsumme. Ohne vollständigen Chatverlauf oder ursprünglichen Prompt. Dieser Einzelversuch ist kein Modellvergleich oder Benchmark." : "Selected session metrics, check outcomes, transcribed screenshot values and checksum. Excludes the full conversation and original prompt. This individual experiment is not a model comparison or benchmark.",
+      note: de ? "Ausgewählte Sitzungsmetriken, Prüf-Ergebnisse, übertragene Screenshot-Werte und Prüfsumme. Ohne vollständigen Chatverlauf. Prompt und Referenzbild stehen oben im Versuchsbericht. Dieser Einzelversuch ist kein Modellvergleich oder Benchmark." : "Selected session metrics, check outcomes, transcribed screenshot values and checksum. Excludes the full conversation. The prompt and reference image are documented above in this report. This individual experiment is not a model comparison or benchmark.",
     },
   };
 }
