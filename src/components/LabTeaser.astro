@@ -14,9 +14,11 @@ const lab = labContent[locale];
   description={copy.description}
   image={experiment.image}
   imageAlt={copy.imageAlt}
+  imageWidth={experiment.imageWidth}
+  imageHeight={experiment.imageHeight}
   href={experimentPath(experiment, locale)}
   linkLabel={lab.read}
-  secondaryLink={{ href: experiment.demoUrl, label: lab.play }}
+  secondaryLink={{ href: experiment.demoUrl, label: copy.result?.label ?? lab.play }}
   tags={experiment.tags}
   horizontal
   artwork

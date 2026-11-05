@@ -2,6 +2,7 @@ import type { Locale } from "../i18n/home";
 import type { PAGE_PAIRS } from "../lib/seo";
 import type { TechnicalReport } from "./technical";
 import { tetrisTechnical } from "./tetris-technical";
+import { paintExperiment } from "./paint-experiment";
 
 interface ExperimentCopy {
   title: string;
@@ -10,20 +11,29 @@ interface ExperimentCopy {
   intro: string;
   facts: { label: string; value: string }[];
   sections: { title: string; text: string }[];
+  result?: {
+    label: string;
+    sourceLabel: string;
+    caption: string;
+    description: string;
+    title: string;
+    instructions: string;
+  };
 }
 export interface ExperimentBrief {
   prompt: string;
   promptLanguage: Locale;
-  image: { src: string; width: number; height: number };
+  image?: { src: string; width: number; height: number };
+  commands?: { label: Record<Locale, string>; code: string }[];
   links: { href: string; label: Record<Locale, string> }[];
   copy: Record<Locale, {
     label: string;
     title: string;
     intro: string;
     promptLabel: string;
-    imageAlt: string;
-    imageCaption: string;
-    imageOpen: string;
+    imageAlt?: string;
+    imageCaption?: string;
+    imageOpen?: string;
   }>;
 }
 export interface Experiment {
@@ -31,8 +41,10 @@ export interface Experiment {
   pageKey: keyof typeof PAGE_PAIRS;
   date: string;
   image: string;
+  imageWidth?: number;
+  imageHeight?: number;
   socialImage: string;
-  video: string;
+  video?: string;
   demoUrl: string;
   sourceUrl: string;
   tags: string[];
@@ -41,7 +53,7 @@ export interface Experiment {
   technical?: Record<Locale, TechnicalReport>;
 }
 
-export const experiments: Experiment[] = [{
+export const experiments: Experiment[] = [paintExperiment, {
   slug: "werkworker-tetris",
   pageKey: "tetris",
   date: "2026-10-26",

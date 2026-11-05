@@ -5,6 +5,8 @@ interface Props {
   description: string;
   image: string;
   imageAlt: string;
+  imageWidth?: number;
+  imageHeight?: number;
   href: string;
   linkLabel: string;
   secondaryLink?: { href: string; label: string };
@@ -12,12 +14,12 @@ interface Props {
   horizontal?: boolean;
   artwork?: boolean;
 }
-const { eyebrow, title, description, image, imageAlt, href, linkLabel, secondaryLink, tags = [], horizontal = false, artwork = false } = Astro.props;
+const { eyebrow, title, description, image, imageAlt, imageWidth, imageHeight, href, linkLabel, secondaryLink, tags = [], horizontal = false, artwork = false } = Astro.props;
 ---
 
 <article class:list={["teaser-card", { "teaser-horizontal": horizontal }]}>
   <a href={href} class:list={["teaser-image", { "teaser-artwork": artwork }]} tabindex="-1" aria-hidden="true">
-    <img src={image} alt={imageAlt} width={artwork ? 870 : 880} height={artwork ? 1108 : 234} loading="lazy" decoding="async" />
+    <img src={image} alt={imageAlt} width={imageWidth ?? (artwork ? 870 : 880)} height={imageHeight ?? (artwork ? 1108 : 234)} loading="lazy" decoding="async" />
   </a>
   <div class="teaser-body">
     <p class="section-label">{eyebrow}</p>

@@ -11,9 +11,11 @@ interface Props {
   description?: string;
   imageUrl?: string;
   imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   schema?: Record<string, unknown>;
 }
-const { locale, pageKey = "home", title, description, imageUrl, imageAlt, schema } = Astro.props;
+const { locale, pageKey = "home", title, description, imageUrl, imageAlt, imageWidth, imageHeight, schema } = Astro.props;
 const base = homeContent[locale];
 const pair = PAGE_PAIRS[pageKey];
 const otherLocale = locale === "de" ? "en" : "de";
@@ -106,6 +108,8 @@ const themeToggleScript = `
       locale={content.ogLocale}
       imageUrl={imageUrl}
       imageAlt={imageAlt}
+      imageWidth={imageWidth}
+      imageHeight={imageHeight}
     />
 
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}

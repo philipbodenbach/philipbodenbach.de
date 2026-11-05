@@ -100,7 +100,7 @@ const { report } = Astro.props;
     <h3 id="artifact-fingerprint-title" class="text-xl font-semibold">{report.artifact.title}</h3>
     <p class="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{report.artifact.text}</p>
     <p class="mt-3 break-all font-mono text-xs leading-6 text-neutral-600 dark:text-neutral-400"><span class="font-semibold">SHA-256</span> {report.artifact.sha256}</p>
-    <a class="button-secondary mt-6" href={report.download.href} download="werkworker-tetris-metrics.json">{report.download.label} <span aria-hidden="true">↓</span></a>
+    <a class="button-secondary mt-6" href={report.download.href} download={report.download.filename ?? "werkworker-tetris-metrics.json"}>{report.download.label} <span aria-hidden="true">↓</span></a>
     <p class="mt-4 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{report.download.note}</p>
   </section>
 </section>

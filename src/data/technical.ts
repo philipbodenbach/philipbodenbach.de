@@ -28,5 +28,5 @@ export interface TechnicalReport {
     images: { src: string; width: number; height: number; title: string; alt: string; caption: string }[];
   };
   artifact: { title: string; text: string; sha256: string };
-  download: { label: string; href: string; note: string };
+  download: { label: string; href: string; note: string; filename?: string };
 }

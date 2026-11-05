@@ -27,6 +27,11 @@ export const PAGE_PAIRS = {
     de: { path: "/lab/werkworker-tetris/", hreflang: "de" },
     en: { path: "/en/lab/werkworker-tetris/", hreflang: "en" },
   },
+  paint: {
+    xDefault: "de",
+    de: { path: "/lab/werkworker-paint/", hreflang: "de" },
+    en: { path: "/en/lab/werkworker-paint/", hreflang: "en" },
+  },
   imprint: {
     xDefault: "de",
     de: { path: "/impressum/", hreflang: "de" },
