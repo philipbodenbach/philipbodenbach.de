@@ -4,6 +4,7 @@ import SiteLayout from "./SiteLayout.astro";
 import TeaserCard from "./TeaserCard.astro";
 import LabTeaser from "./LabTeaser.astro";
 import { projects } from "../data/projects";
+import { experiments } from "../data/experiments";
 import { labContent } from "../i18n/lab";
 import type { HomeContent } from "../i18n/home";
 import { LOGO_IMAGE_URL, PERSON_ID, absoluteUrl } from "../lib/seo";
@@ -142,7 +143,7 @@ const personSchema = {
 
       <section
         id="leistungen"
-        class="border-t border-neutral-200 dark:border-neutral-800"
+        class="border-t border-neutral-200 [overflow-wrap:anywhere] dark:border-neutral-800"
       >
         <div
           class="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.65fr_0.35fr] lg:px-8"
@@ -227,13 +228,15 @@ const personSchema = {
             </div>
             <a class="text-link" href={lab.path}>{lab.allExperiments} <span aria-hidden="true">→</span></a>
           </div>
-          <LabTeaser locale={content.lang} />
+          <div class="space-y-8">
+            {experiments.map(experiment => <LabTeaser locale={content.lang} experiment={experiment} />)}
+          </div>
         </div>
       </section>
 
       <section
         id="kontakt"
-        class="border-t border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"
+        class="border-t border-neutral-200 bg-white [overflow-wrap:anywhere] dark:border-neutral-800 dark:bg-neutral-900"
       >
         <div
           class="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 lg:grid-cols-[0.35fr_0.65fr] lg:px-8"

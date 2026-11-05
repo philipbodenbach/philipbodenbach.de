@@ -16,6 +16,8 @@ interface Props {
   ogType?: string;
   imageUrl?: string;
   imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
 }
 
 const {
@@ -28,6 +30,8 @@ const {
   ogType = "website",
   imageUrl = OG_IMAGE_URL,
   imageAlt = "Philip Bodenbach logo with Software Engineer and Software Architect text",
+  imageWidth = 1200,
+  imageHeight = 630,
 } = Astro.props;
 
 const ogLocaleAlternates = alternateLinks
@@ -70,8 +74,8 @@ const ogLocaleAlternates = alternateLinks
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image:width" content={imageWidth} />
+<meta property="og:image:height" content={imageHeight} />
 <meta property="og:image:alt" content={imageAlt} />
 
 <meta name="twitter:card" content="summary_large_image" />

@@ -6,22 +6,26 @@ const { brief, locale } = Astro.props;
 const copy = brief.copy[locale];
 ---
 <section id="brief" aria-labelledby="brief-title" class="mx-auto max-w-6xl px-5 pb-14 sm:px-6 lg:px-8">
-  <div class="grid gap-10 md:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-    <div class="min-w-0 self-center">
+  <div class:list={["grid gap-10 lg:gap-16", { "md:grid-cols-[1.1fr_0.9fr]": brief.image }]}>
+    <div class="min-w-0 max-w-3xl self-center">
       <p class="section-label">{copy.label}</p>
       <h2 id="brief-title" class="section-heading">{copy.title}</h2>
       <p class="mt-5 text-base leading-7 text-neutral-700 dark:text-neutral-300">{copy.intro}</p>
       <div class="mt-7 rounded-lg border border-neutral-200 bg-white p-5 sm:p-6 dark:border-neutral-800 dark:bg-neutral-900">
         <p id="prompt-label" class="text-sm font-medium text-neutral-500 dark:text-neutral-400">{copy.promptLabel}</p>
         <blockquote lang={brief.promptLanguage} aria-labelledby="prompt-label" class="mt-4 text-lg leading-8 text-neutral-800 dark:text-neutral-200">
-          <p>{brief.prompt}</p>
+          <p class="whitespace-pre-line">{brief.prompt}</p>
         </blockquote>
       </div>
       <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-3">
         {brief.links.map(link => <li><a class="text-link" href={link.href}>{link.label[locale]} <span aria-hidden="true">↗</span></a></li>)}
       </ul>
+      {brief.commands?.map(command => <details class="mt-4 rounded-lg border border-neutral-200 dark:border-neutral-800">
+        <summary class="cursor-pointer p-5 font-medium">{command.label[locale]}</summary>
+        <pre class="overflow-x-auto px-5 pb-5 text-sm leading-7"><code>{command.code}</code></pre>
+      </details>)}
     </div>
-    <figure class="min-w-0 self-center">
+    {brief.image && <figure class="min-w-0 self-center">
       <a href={brief.image.src} class="mx-auto block max-w-md overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800" aria-label={copy.imageOpen}>
         <img src={brief.image.src} width={brief.image.width} height={brief.image.height} loading="lazy" decoding="async" alt={copy.imageAlt} class="h-auto w-full" />
       </a>
@@ -29,6 +33,6 @@ const copy = brief.copy[locale];
         <p>{copy.imageCaption}</p>
         <a class="text-link mt-2" href={brief.image.src}>{copy.imageOpen} <span aria-hidden="true">↗</span></a>
       </figcaption>
-    </figure>
+    </figure>}
   </div>
 </section>

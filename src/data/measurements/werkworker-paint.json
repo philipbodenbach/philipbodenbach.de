@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "experiment": "werkworker-paint",
+  "measurement_date": "2026-11-05",
+  "sources": {
+    "run": "Allowlisted metrics and original prompt from the saved WerkWorker session. No full transcript, credentials or local workspace paths.",
+    "screenshots": "Six original user-supplied PNG screenshots, copied without modification. Capture times come from their filenames in Europe/Berlin.",
+    "werk_top": "Manually transcribed values from the supplied final monitor screenshot; rounded snapshot values, not peaks or whole-run averages.",
+    "configuration": "Stored run limits and project configuration, supplied server command, and terminal screenshots."
+  },
+  "prompt": "Open https://jspaint.app and draw a simple house in a colorful landscape:\n- A house with a black rectangular outline, filled brown with blue windows and a fully filled red triangular roof.\n- A fully filled green meadow beneath the house.\n- A fully filled blue sky.\n- White clouds and a fully filled yellow sun.\nWork alone and exclusively through the browser interface. Keep planning and progress updates brief.\nSelect the appropriate tool and color for each step. Draw the house rectangle by dragging between opposite corners. Draw the roof with the pencil tool in one continuous, closed triangular drag path, then use the fill tool to fill it red.\nDraw the sky and meadow first, then add the house, clouds, and sun. Ensure that the filled regions have no unintended gaps or color spills.\nUse the screenshots returned by actions to check your work. Request additional observations only when needed. Correct visible mistakes and inspect the finished picture.\nLeave the browser open and briefly report the result.",
+  "run": {
+    "session_id": "session_6db393f2-9a37-47de-b784-31b1632eae22",
+    "run_id": "run_538aa77a-3fd3-491f-b08c-c9d01e6ed4f7",
+    "status": "completed",
+    "started_at": "2026-11-05T13:40:40.318+01:00",
+    "completed_at": "2026-11-05T14:42:41.648+01:00",
+    "timezone": "Europe/Berlin",
+    "metrics": {
+      "steps": 64,
+      "model_requests": 64,
+      "tool_invocations": 63,
+      "first_text_ms": 133396,
+      "first_tool_ms": 18027,
+      "approval_wait_ms": 62679,
+      "total_ms": 3721330,
+      "input_tokens": 1409331,
+      "output_tokens": 63397,
+      "estimated_input_tokens": 21325
+    },
+    "tool_counts": {
+      "task.plan": 3,
+      "browser.open": 1,
+      "browser.action": 54,
+      "browser.observe": 2,
+      "browser.evaluate": 3
+    },
+    "tool_outcomes": {
+      "succeeded": 57,
+      "validation_error": 5,
+      "failed": 1
+    },
+    "tool_error_counts": {
+      "invalid_browser_target": 5,
+      "browser_action_failed": 1
+    },
+    "attempt_error_counts": {},
+    "plan_steps": 5,
+    "child_sessions": 0,
+    "reference_images": 0,
+    "last_context_omitted_messages": 120,
+    "configuration": {
+      "profile": "coding-basic",
+      "model": "qwen3.8-27b-ud-q4_k_xl",
+      "continuous": true,
+      "context_tokens": 32768,
+      "reserve_output_tokens": 4096,
+      "reasoning_tier": "high",
+      "reasoning_tokens": 2048,
+      "perception": "auto",
+      "browser_limits": {
+        "lifetime_seconds": 0,
+        "idle_seconds": 0,
+        "max_actions": 600
+      },
+      "browser_actions_used": 55
+    }
+  },
+  "server_configuration": {
+    "backend": "cuda",
+    "parallel": 1,
+    "context_tokens": 32768,
+    "gpu_layers_requested": 999,
+    "kv_offload": true,
+    "flash_attention": true,
+    "kv_cache_type": "q8-0",
+    "batch_size": 1024,
+    "ubatch_size": 256,
+    "threads": 24,
+    "threads_batch": 24
+  },
+  "werk_top_snapshot": {
+    "observed_at": "2026-11-05T14:46:51+01:00",
+    "server_uptime_seconds": 4438,
+    "runtime": "llama.cpp",
+    "device_backend": "CUDA",
+    "inference_slots": 1,
+    "host_memory_used_including_cache_gib": 62.0,
+    "host_memory_capacity_gib": 98.3,
+    "host_available_gib": 77.6,
+    "worker_rss_gib": 10.9,
+    "swap_used_gib": 0,
+    "gpu_memory_used_gib": 21.5,
+    "gpu_memory_capacity_gib": 24.0,
+    "gpu_pressure": "HARD",
+    "backend_context_used_tokens": 21026,
+    "backend_context_capacity_tokens": 32768,
+    "visible_requests": [
+      {
+        "id": 64,
+        "prompt_tokens": 20753,
+        "cached_tokens": 0,
+        "output_tokens": 274,
+        "elapsed_seconds": 31.37,
+        "decode_tokens_per_second": 33.5,
+        "state": "done"
+      },
+      {
+        "id": 63,
+        "prompt_tokens": 24891,
+        "cached_tokens": 14179,
+        "output_tokens": 726,
+        "elapsed_seconds": 38.24,
+        "decode_tokens_per_second": 32.3,
+        "state": "tool_calls"
+      },
+      {
+        "id": 62,
+        "prompt_tokens": 21029,
+        "cached_tokens": 5018,
+        "output_tokens": 269,
+        "elapsed_seconds": 28.11,
+        "decode_tokens_per_second": 33.5,
+        "state": "tool_calls"
+      },
+      {
+        "id": 61,
+        "prompt_tokens": 24609,
+        "cached_tokens": 13925,
+        "output_tokens": 1155,
+        "elapsed_seconds": 49.73,
+        "decode_tokens_per_second": 33.5,
+        "state": "tool_calls"
+      },
+      {
+        "id": 60,
+        "prompt_tokens": 20722,
+        "cached_tokens": 5018,
+        "output_tokens": 1304,
+        "elapsed_seconds": 56.08,
+        "decode_tokens_per_second": 32.5,
+        "state": "tool_calls"
+      },
+      {
+        "id": 59,
+        "prompt_tokens": 25232,
+        "cached_tokens": 14814,
+        "output_tokens": 1380,
+        "elapsed_seconds": 56.39,
+        "decode_tokens_per_second": 32.4,
+        "state": "tool_calls"
+      },
+      {
+        "id": 58,
+        "prompt_tokens": 21483,
+        "cached_tokens": 5018,
+        "output_tokens": 853,
+        "elapsed_seconds": 44.28,
+        "decode_tokens_per_second": 32.9,
+        "state": "tool_calls"
+      },
+      {
+        "id": 57,
+        "prompt_tokens": 25211,
+        "cached_tokens": 13905,
+        "output_tokens": 2192,
+        "elapsed_seconds": 82.53,
+        "decode_tokens_per_second": 32.5,
+        "state": "tool_calls"
+      },
+      {
+        "id": 56,
+        "prompt_tokens": 20710,
+        "cached_tokens": 5018,
+        "output_tokens": 1504,
+        "elapsed_seconds": 63.05,
+        "decode_tokens_per_second": 33.2,
+        "state": "tool_calls"
+      },
+      {
+        "id": 55,
+        "prompt_tokens": 24829,
+        "cached_tokens": 14384,
+        "output_tokens": 269,
+        "elapsed_seconds": 22.06,
+        "decode_tokens_per_second": 33.1,
+        "state": "tool_calls"
+      },
+      {
+        "id": 54,
+        "prompt_tokens": 21424,
+        "cached_tokens": 5018,
+        "output_tokens": 371,
+        "elapsed_seconds": 29.25,
+        "decode_tokens_per_second": 33.0,
+        "state": "tool_calls"
+      },
+      {
+        "id": 53,
+        "prompt_tokens": 25281,
+        "cached_tokens": 14406,
+        "output_tokens": 326,
+        "elapsed_seconds": 25.12,
+        "decode_tokens_per_second": 33.5,
+        "state": "tool_calls"
+      },
+      {
+        "id": 52,
+        "prompt_tokens": 21455,
+        "cached_tokens": 5018,
+        "output_tokens": 2194,
+        "elapsed_seconds": 85.45,
+        "decode_tokens_per_second": 33.9,
+        "state": "tool_calls"
+      },
+      {
+        "id": 51,
+        "prompt_tokens": 25077,
+        "cached_tokens": 14201,
+        "output_tokens": 472,
+        "elapsed_seconds": 28.73,
+        "decode_tokens_per_second": 32.8,
+        "state": "tool_calls"
+      },
+      {
+        "id": 50,
+        "prompt_tokens": 21069,
+        "cached_tokens": 5018,
+        "output_tokens": 2287,
+        "elapsed_seconds": 87.18,
+        "decode_tokens_per_second": 33.7,
+        "state": "tool_calls"
+      },
+      {
+        "id": 49,
+        "prompt_tokens": 24534,
+        "cached_tokens": 13880,
+        "output_tokens": 1339,
+        "elapsed_seconds": 56.05,
+        "decode_tokens_per_second": 32.7,
+        "state": "tool_calls"
+      }
+    ]
+  },
+  "verification": {
+    "drawing_via_browser_actions": true,
+    "script_draw_calls": 0,
+    "pixel_inspection_calls": 3,
+    "pixel_inspection_succeeded": 2,
+    "pixel_inspection_failed": 1,
+    "strict_ui_only": false,
+    "visible_limitations": [
+      "One blue window is visible although the prompt asks for windows.",
+      "A horizontal line remains visible through the brown house."
+    ],
+    "comparison": "Context and reasoning settings changed together and the prompt also gained the brown fill and blue windows. This successful individual run does not isolate the effect of reasoning."
+  },
+  "evidence": [
+    {
+      "id": "canvas-progress",
+      "path": "/lab/paint/sky-meadow.png",
+      "width": 1312,
+      "height": 985,
+      "captured_at": "2026-11-05T13:53:09+01:00",
+      "sha256": "610313346aa588c80af0b2767a42ff779e5df6d6c8d92bf313eb9f10f1f2a0bc",
+      "bytes": 127449
+    },
+    {
+      "id": "worker-progress",
+      "path": "/lab/paint/worker-progress.png",
+      "width": 1852,
+      "height": 972,
+      "captured_at": "2026-11-05T13:53:15+01:00",
+      "sha256": "c107de08dd77f54fdaa56a16076d2207a4d8f5e103d221ab79a7ce25f0bd2f7b",
+      "bytes": 143548
+    },
+    {
+      "id": "monitor-progress",
+      "path": "/lab/paint/werk-top-progress.png",
+      "width": 1847,
+      "height": 967,
+      "captured_at": "2026-11-05T13:53:20+01:00",
+      "sha256": "b549df29457756020ecce796889adf893da2cd99fadc24a653f817339e9176e3",
+      "bytes": 150679
+    },
+    {
+      "id": "worker",
+      "path": "/lab/paint/worker-completed.png",
+      "width": 1878,
+      "height": 971,
+      "captured_at": "2026-11-05T14:46:46+01:00",
+      "sha256": "997a036600a948134f600bc1f197215b7a4081c6763854a2899148b73fef4623",
+      "bytes": 163729
+    },
+    {
+      "id": "monitor",
+      "path": "/lab/paint/werk-top-completed.png",
+      "width": 1857,
+      "height": 963,
+      "captured_at": "2026-11-05T14:46:51+01:00",
+      "sha256": "bd1ed5184bb2ca4f2462baae10947785b57bed7511b494fc8c2a9347f1c1d917",
+      "bytes": 157622
+    },
+    {
+      "id": "result",
+      "path": "/lab/paint/result.png",
+      "width": 1335,
+      "height": 996,
+      "captured_at": "2026-11-05T14:46:58+01:00",
+      "sha256": "04e749ed9684d383f815e24f8b1c5425ee509ad0791eccb8f112427c9825a2a7",
+      "bytes": 195975
+    }
+  ],
+  "artifact": {
+    "id": "result",
+    "path": "/lab/paint/result.png",
+    "width": 1335,
+    "height": 996,
+    "captured_at": "2026-11-05T14:46:58+01:00",
+    "sha256": "04e749ed9684d383f815e24f8b1c5425ee509ad0791eccb8f112427c9825a2a7",
+    "bytes": 195975
+  }
+}
